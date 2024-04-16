@@ -1,0 +1,55 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*:focus {
+  outline: none;
+}
+html {
+  font-size: 100%;
+  font-family: $primary-font;
+  font-weight: 500;
+  font-style: normal;
+  color: $grey;
+  line-height: 1.5rem;
+}
+body {
+  font-size: 0.875rem;
+}
+ul {
+  list-style: none;
+}
+button {
+  border: none;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  appearance: none;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+input[type="text"] {
+  border-radius: 0;
+}
