@@ -1,12 +1,15 @@
 <template>
-  <form action="javascript:void(0)" class="signin">
-    <h1 class="signin__title">Sign In</h1>
+  <form action="javascript:void(0)" class="signup">
+    <h1 class="signup__title">Sign Up</h1>
+    <BaseInput :label="'Name'" :type="'text'" />
     <BaseInput :label="'Login'" :type="'text'" />
     <BaseInput :label="'Password'" :type="'password'" />
-    <BaseButton :name="'Sign in'" />
-    <div class="signin__additionals">
-      <span class="signin__additional-message">Not a member yet? </span>
-      <BaseLink :href="RouteNamesEnum.signup">Sign up</BaseLink>
+    <BaseInput :label="'Enter your password again'" :type="'password'" />
+    <BaseCheckbox :label="'I accept the agreement'" />
+    <BaseButton :name="'Sign Up'" />
+    <div class="signup__additionals">
+      <span class="signup__additional-message">Already a member? </span>
+      <BaseLink :href="RouteNamesEnum.signin">Sign in</BaseLink>
     </div>
   </form>
 </template>
@@ -14,20 +17,21 @@
 <script lang="ts" setup>
 import BaseInput from "@/components/Inputs/BaseInput.vue";
 import BaseButton from "@/components/Buttons/BaseButton.vue";
+import BaseCheckbox from "@/components/Checkboxes/BaseCheckbox.vue";
 import BaseLink from "@/components/Links/BaseLink.vue";
 import { RouteNamesEnum } from "@/router/router.types";
 </script>
 
 <script lang="ts">
 export default {
-  name: "SignInForm",
+  name: "SignUpForm",
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
 
-.signin {
+.signup {
   display: flex;
   flex-direction: column;
   width: 22.875rem;

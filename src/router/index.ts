@@ -3,12 +3,21 @@ import { loadLayoutMiddleware } from "@/router/middleware/loadLayout.middleware"
 import { RouteNamesEnum } from "@/router/router.types";
 import { AppLayoutsEnum } from "@/layouts/layouts.types";
 import SignIn from "@/pages/SignIn.vue";
+import SignUp from "@/pages/SignUp.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/signin",
     name: RouteNamesEnum.signin,
     component: SignIn,
+    meta: {
+      layout: AppLayoutsEnum.auth,
+    },
+  },
+  {
+    path: "/signup",
+    name: RouteNamesEnum.signup,
+    component: SignUp,
     meta: {
       layout: AppLayoutsEnum.auth,
     },

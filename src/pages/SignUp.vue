@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <main class="main">
-      <SignInForm />
+      <SignUpForm />
     </main>
     <aside class="aside">
-      <img src="@/assets/img/sign_in.svg" alt="" class="aside__img" />
+      <img src="@/assets/img/sign_up.svg" alt="" class="aside__img" />
     </aside>
   </div>
 </template>
 
 <script lang="ts" setup>
-import SignInForm from "@/components/Forms/SignInForm.vue";
+import SignUpForm from "@/components/Forms/SignUpForm.vue";
 </script>
 
 <style lang="scss" scoped>
