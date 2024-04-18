@@ -26,25 +26,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
+@import "@/assets/scss/mixins/auth";
 
 .signin {
-  display: flex;
-  flex-direction: column;
-  width: 22.875rem;
-  gap: 1.625rem;
-
-  &__title {
-    font-family: $title-font;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 2.25rem;
-    line-height: 3.07rem;
-    color: $blue;
-    margin-bottom: 2rem;
-  }
-
-  &__additionals {
-    margin: 0 auto;
-  }
+  @include auth;
 }
 </style>

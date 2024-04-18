@@ -1,0 +1,27 @@
+@mixin auth {
+  display: flex;
+  flex-direction: column;
+  min-width: 20.4375rem;
+  max-width: 22.875rem;
+  margin: 0 1.5rem;
+  flex-grow: 1;
+  gap: 1.625rem;
+
+  &__title {
+    font-family: $title-font;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.25rem;
+    line-height: 3.07rem;
+    color: $blue;
+    margin-bottom: 2rem;
+
+    @media screen and (max-width: 1079px) {
+      text-align: center;
+    }
+  }
+
+  &__additionals {
+    margin: 0 auto;
+  }
+}

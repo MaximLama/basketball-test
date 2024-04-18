@@ -4,6 +4,7 @@ import { RouteNamesEnum } from "@/router/router.types";
 import { AppLayoutsEnum } from "@/layouts/layouts.types";
 import SignIn from "@/pages/SignIn.vue";
 import SignUp from "@/pages/SignUp.vue";
+import BasketballTeams from "@/pages/BasketballTeams.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,6 +21,14 @@ const routes: Array<RouteRecordRaw> = [
     component: SignUp,
     meta: {
       layout: AppLayoutsEnum.auth,
+    },
+  },
+  {
+    path: "/teams",
+    name: RouteNamesEnum.teams,
+    component: BasketballTeams,
+    meta: {
+      layout: AppLayoutsEnum.default,
     },
   },
 ];
