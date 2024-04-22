@@ -1,13 +1,8 @@
 <template>
-  <div class="nav-item">
+  <router-link :to="href" :class="'nav-item'" :active-class="'active'">
     <div class="nav-item__icon" v-html="svg"></div>
-    <router-link
-      :to="href"
-      :class="'nav-item__text'"
-      :active-class="'active'"
-      >{{ name }}</router-link
-    >
-  </div>
+    <span class="nav-item__text">{{ name }}</span>
+  </router-link>
 </template>
 
 <script lang="ts" setup>
@@ -25,3 +20,41 @@ export default {
   name: "PrimaryMenuItem",
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/variables";
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  align-items: center;
+  cursor: pointer;
+
+  &__icon {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &__text {
+    font-size: 0.75rem;
+    color: $light-grey;
+    line-height: 1.125rem;
+  }
+}
+
+.active {
+  :deep {
+    svg {
+      path {
+        fill: $red;
+      }
+    }
+  }
+
+  .nav-item__text {
+    color: $red;
+  }
+}
+</style>

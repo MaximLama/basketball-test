@@ -4,7 +4,8 @@ import { RouteNamesEnum } from "@/router/router.types";
 import { AppLayoutsEnum } from "@/layouts/layouts.types";
 import SignIn from "@/pages/SignIn.vue";
 import SignUp from "@/pages/SignUp.vue";
-import BasketballTeams from "@/pages/BasketballTeams.vue";
+import Teams from "@/pages/Teams.vue";
+import Players from "@/pages/Players.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -26,7 +27,15 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/teams",
     name: RouteNamesEnum.teams,
-    component: BasketballTeams,
+    component: Teams,
+    meta: {
+      layout: AppLayoutsEnum.default,
+    },
+  },
+  {
+    path: "/players",
+    name: RouteNamesEnum.players,
+    component: Players,
     meta: {
       layout: AppLayoutsEnum.default,
     },

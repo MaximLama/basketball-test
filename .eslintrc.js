@@ -25,7 +25,7 @@ module.exports = {
     "vue/multi-word-component-names": [
       "error",
       {
-        ignores: ["Header", "Logo"],
+        ignores: ["Header", "Logo", "Teams", "Players"],
       },
     ],
   },
