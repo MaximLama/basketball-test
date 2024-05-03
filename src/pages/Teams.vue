@@ -7,6 +7,9 @@
     <div class="row card-grid">
       <TeamCard v-for="(team, index) in teams" :key="index" :team="team" />
     </div>
+    <div class="row">
+      <BasePagination :total="27" />
+    </div>
   </div>
 </template>
 
@@ -14,6 +17,7 @@
 import SearchInput from "@/components/Inputs/SearchInput.vue";
 import AddButton from "@/components/Buttons/AddButton.vue";
 import TeamCard from "@/components/Cards/TeamCard.vue";
+import BasePagination from "@/components/Blocks/BasePagination.vue";
 import ITeamCardProps from "@/interfaces/ITeamCardProps";
 
 const teams: ITeamCardProps[] = [
