@@ -25,6 +25,6 @@ import PrimaryMenu from "@/components/Navs/PrimaryMenu.vue";
 .main {
   flex-grow: 1;
   background-color: $lightest-grey1;
-  padding: 2rem 5rem;
+  //padding: 2rem 4.17vw;
 }
 </style>

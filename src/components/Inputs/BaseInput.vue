@@ -2,16 +2,10 @@
   <div class="input__wrapper">
     <label class="input__label"> {{ label }}</label>
     <div class="input__inner">
-      <input
-        class="input"
-        :class="{
-          'input--error': error !== '',
-          'input--password': type === 'password',
-        }"
-        :type="type"
-        v-model="model"
-        :disabled="disabled"
-      />
+      <input class="input" :class="{
+        'input--error': error !== '',
+        'input--password': type === 'password',
+      }" :type="type" v-model="model" :disabled="disabled" />
       <span class="input__eye" v-if="type === 'password'"></span>
     </div>
     <span class="input__error-msg">{{ error }}</span>
@@ -22,10 +16,6 @@
 export default {
   name: "BaseInput",
 };
-</script>
-
-<script lang="ts" setup>
-import { withDefaults, toRefs, defineModel } from "vue";
 
 interface IInputProps {
   label: string;
@@ -33,6 +23,10 @@ interface IInputProps {
   disabled?: boolean;
   error?: string;
 }
+</script>
+
+<script lang="ts" setup>
+import { toRefs } from "vue";
 
 const props = withDefaults(defineProps<IInputProps>(), {
   label: "Label",

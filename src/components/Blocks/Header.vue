@@ -1,5 +1,6 @@
 <template>
   <header class="header">
+    <div id="menubutton"></div>
     <Logo />
     <HeaderProfile />
   </header>
@@ -29,5 +30,9 @@ export default {
   justify-content: space-between;
   box-shadow: 0 1px 10px rgba($color: $lightest-grey, $alpha: 0.5);
   z-index: 2;
+}
+
+#menubutton {
+  display: none;
 }
 </style>

@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import ITeamCardProps from "@/interfaces/ITeamCardProps";
+import type ITeamCardProps from "@/interfaces/ITeamCardProps";
 import { toRefs } from "vue";
 
 const props = defineProps<{
@@ -34,11 +34,13 @@ export default {
 
 .card {
   display: flex;
-  width: 22.75rem;
+  flex-grow: 1;
+  min-width: $min-team-card-w;
   flex-direction: column;
 
   &__top {
-    height: 17.5rem;
+    height: 26.93vw;
+    max-height: 17.5rem;
     background: linear-gradient(to bottom right, #707070, #393939);
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
@@ -48,8 +50,10 @@ export default {
   }
 
   &__image {
-    width: 9.375rem;
-    height: 9.375rem;
+    width: 16vw;
+    height: 16vw;
+    max-width: 9.375rem;
+    max-height: 9.375rem;
     flex-shrink: 0;
     object-fit: contain;
   }

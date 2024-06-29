@@ -15,7 +15,7 @@ export default {
 @import "@/assets/scss/variables";
 
 .search {
-  width: 22.75rem;
+  width: 100%;
   height: 2.5rem;
   border: 0.5px solid $lightest-grey;
   border-radius: 0.25rem;
@@ -23,7 +23,11 @@ export default {
   padding-right: 2.5rem;
 
   &__wrapper {
-    display: inline-block;
+    grid-area: search_input;
+    display: inline-flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-width: 22.75rem;
     position: relative;
   }
 
