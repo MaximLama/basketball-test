@@ -4,14 +4,21 @@
   </router-link>
 </template>
 
-<script lang="ts" setup>
-import { computed, toRefs } from "vue";
-import { RouteLocationRaw, useRoute } from "vue-router";
+<script lang="ts">
+export default {
+  name: "BasePaginationLink",
+};
 
 interface BasePaginationLinkProps {
   href: RouteLocationRaw;
   page: number;
 }
+</script>
+
+<script lang="ts" setup>
+import { computed, toRefs } from "vue";
+import { useRoute } from "vue-router";
+import type { RouteLocationRaw } from "vue-router";
 
 const props = defineProps<BasePaginationLinkProps>();
 const route = useRoute();
@@ -25,12 +32,6 @@ const routePage = computed(() => {
 const isActive = computed(() => {
   return routePage.value == page.value;
 });
-</script>
-
-<script lang="ts">
-export default {
-  name: "BasePaginationLink",
-};
 </script>
 
 <style lang="scss" scoped>

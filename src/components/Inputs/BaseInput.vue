@@ -80,7 +80,7 @@ const model = defineModel<string>();
   }
 
   &__eye {
-    background: url("@/assets/img/password_eye.svg") 0 0 no-repeat;
+    background: url("@/assets/img/icons/password_eye.svg") 0 0 no-repeat;
     display: block;
     width: 1rem;
     height: 1rem;

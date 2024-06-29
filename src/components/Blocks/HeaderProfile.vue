@@ -2,11 +2,7 @@
   <div class="header-profile">
     <span class="header-profile__name">John Smith</span>
     <div class="header-profile__image-box">
-      <img
-        src="@/assets/img/profile.jpg"
-        alt=""
-        class="header-profile__image"
-      />
+      <img :src="ProfileImage" alt="" class="header-profile__image" />
     </div>
   </div>
 </template>
@@ -15,6 +11,10 @@
 export default {
   name: "HeaderProfile",
 };
+</script>
+
+<script lang="ts" setup>
+import ProfileImage from "@/assets/img/profile.jpg";
 </script>
 
 <style lang="scss" scoped>

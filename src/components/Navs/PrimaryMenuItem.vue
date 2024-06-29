@@ -1,6 +1,6 @@
 <template>
   <router-link :to="href" :class="'nav-item'" :active-class="'active'">
-    <div class="nav-item__icon" v-html="svg"></div>
+    <component class="nav-item__icon" :is="svg" />
     <span class="nav-item__text">{{ name }}</span>
   </router-link>
 </template>
@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import { RouterLink } from "vue-router";
 import { toRefs } from "vue";
-import IPrimaryMenuItemProps from "@/interfaces/IPrimaryMenuItemProps";
+import type IPrimaryMenuItemProps from "@/interfaces/IPrimaryMenuItemProps";
 
 const props = defineProps<IPrimaryMenuItemProps>();
 
@@ -45,12 +45,8 @@ export default {
 }
 
 .active {
-  :deep {
-    svg {
-      path {
-        fill: $red;
-      }
-    }
+  :deep(svg path) {
+    fill: $red;
   }
 
   .nav-item__text {

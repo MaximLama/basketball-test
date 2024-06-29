@@ -1,5 +1,9 @@
+import type { DefineComponent } from 'vue'
+
+type IconComponent = DefineComponent<{}, {}, any>
+
 export default interface IPrimaryMenuItemProps {
-  svg: string;
-  href: string;
-  name: string;
+  svg: IconComponent
+  href: string
+  name: string
 }

@@ -3,16 +3,12 @@ import type { RouteRecordRaw } from 'vue-router'
 import { loadLayoutMiddleware } from '@/router/middleware/loadLayout.middleware'
 import { RouteNamesEnum } from '@/router/router.types'
 import { AppLayoutsEnum } from '@/layouts/layouts.types'
-import SignIn from '@/pages/SignIn.vue'
-import SignUp from '@/pages/SignUp.vue'
-import Teams from '@/pages/Teams.vue'
-import Players from '@/pages/Players.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/signin',
     name: RouteNamesEnum.signin,
-    component: SignIn,
+    component: () => import('@/pages/SignIn.vue'),
     meta: {
       layout: AppLayoutsEnum.auth
     }
@@ -20,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/signup',
     name: RouteNamesEnum.signup,
-    component: SignUp,
+    component: () => import('@/pages/SignUp.vue'),
     meta: {
       layout: AppLayoutsEnum.auth
     }
@@ -28,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/teams',
     name: RouteNamesEnum.teams,
-    component: Teams,
+    component: () => import('@/pages/Teams.vue'),
     meta: {
       layout: AppLayoutsEnum.default
     }
@@ -36,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/players',
     name: RouteNamesEnum.players,
-    component: Players,
+    component: () => import('@/pages/Players.vue'),
     meta: {
       layout: AppLayoutsEnum.default
     }

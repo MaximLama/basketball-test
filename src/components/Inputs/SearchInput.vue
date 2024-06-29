@@ -32,7 +32,7 @@ export default {
   }
 
   &__button {
-    background: url("@/assets/img/search.svg") 0 0 no-repeat;
+    background: url("@/assets/img/icons/search.svg") 0 0 no-repeat;
     display: block;
     width: 1rem;
     height: 1rem;

@@ -1,11 +1,15 @@
 <template>
-  <img class="logo" src="@/assets/img/logo.svg" alt="" />
+  <img class="logo" :src="Logo" alt="" />
 </template>
 
 <script lang="ts">
 export default {
   name: "Logo",
 };
+</script>
+
+<script lang="ts" setup>
+import Logo from "@/assets/img/icons/logo.svg";
 </script>
 
 <style scoped>

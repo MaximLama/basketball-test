@@ -1,5 +1,5 @@
 <template>
-  <BaseButton :name="'Add +'" :class="'add-btn'" />
+  <BaseButton name='Add +' class="add-btn" />
 </template>
 
 <script lang="ts" setup>

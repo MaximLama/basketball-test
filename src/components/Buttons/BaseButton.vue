@@ -1,20 +1,22 @@
 <template>
-  <button
-    class="btn"
-    :class="{ 'btn--disabled': disabled }"
-    :disabled="disabled"
-  >
+  <button class="btn" :class="{ 'btn--disabled': disabled }" :disabled="disabled">
     {{ name }}
   </button>
 </template>
 
-<script lang="ts" setup>
-import { toRefs, withDefaults } from "vue";
+<script lang="ts">
+export default {
+  name: "BaseButton",
+};
 
 interface IButtonProps {
   name: string;
   disabled?: boolean;
 }
+</script>
+
+<script lang="ts" setup>
+import { toRefs, withDefaults } from "vue";
 
 const props = withDefaults(defineProps<IButtonProps>(), {
   name: "",
@@ -22,12 +24,6 @@ const props = withDefaults(defineProps<IButtonProps>(), {
 });
 
 const { name, disabled } = toRefs(props);
-</script>
-
-<script lang="ts">
-export default {
-  name: "BaseButton",
-};
 </script>
 
 <style lang="scss" scoped>

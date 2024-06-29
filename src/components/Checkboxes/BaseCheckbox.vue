@@ -1,22 +1,18 @@
 <template>
   <div class="checkbox__wrapper">
     <div class="checkbox__inner">
-      <input
-        type="checkbox"
-        class="checkbox"
-        :class="{ 'checkbox--error': error !== '' }"
-        :id="id"
-        :disabled="disabled"
-        :checked="checked"
-      />
+      <input type="checkbox" class="checkbox" :class="{ 'checkbox--error': error !== '' }" :id="id" :disabled="disabled"
+        :checked="checked" />
       <label :for="id" class="checkbox__label">{{ label }}</label>
     </div>
     <span class="checkbox__error-msg" v-if="error !== ''">{{ error }}</span>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { withDefaults, toRefs } from "vue";
+<script lang="ts">
+export default {
+  name: "BaseCheckbox",
+};
 
 interface ICheckboxProps {
   label: string;
@@ -25,6 +21,10 @@ interface ICheckboxProps {
   error?: string;
   checked?: boolean;
 }
+</script>
+
+<script lang="ts" setup>
+import { withDefaults, toRefs } from "vue";
 
 const props = withDefaults(defineProps<ICheckboxProps>(), {
   label: "Label",
@@ -37,12 +37,6 @@ const props = withDefaults(defineProps<ICheckboxProps>(), {
 const { label, id, disabled, error, checked } = toRefs(props);
 </script>
 
-<script lang="ts">
-export default {
-  name: "BaseCheckbox",
-};
-</script>
-
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
 
@@ -51,7 +45,7 @@ export default {
   z-index: -1;
   opacity: 0;
 
-  & + &__label {
+  &+&__label {
     display: inline-flex;
     align-items: center;
     user-select: none;
@@ -72,7 +66,7 @@ export default {
     }
   }
 
-  &--error + &__label {
+  &--error+&__label {
     color: $lightest-red;
 
     &::before {
@@ -80,17 +74,17 @@ export default {
     }
   }
 
-  &:checked + &__label::before {
+  &:checked+&__label::before {
     border: none;
     background-color: red;
-    background-image: url("@/assets/img/checkbox.svg");
+    background-image: url("@/assets/icons/img/checkbox.svg");
   }
 
-  &:not(:disabled):not(:checked) + &__label:hover::before {
+  &:not(:disabled):not(:checked)+&__label:hover::before {
     border-color: $red;
   }
 
-  &:disabled:not(:checked) + &__label {
+  &:disabled:not(:checked)+&__label {
     color: $lightest-grey;
 
     &::before {
@@ -98,7 +92,7 @@ export default {
     }
   }
 
-  &:disabled:checked + &__label {
+  &:disabled:checked+&__label {
     color: $lightest-grey;
 
     &::before {

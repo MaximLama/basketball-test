@@ -1,12 +1,12 @@
 <template>
   <form action="javascript:void(0)" class="signup">
     <h1 class="signup__title">Sign Up</h1>
-    <BaseInput :label="'Name'" :type="'text'" />
-    <BaseInput :label="'Login'" :type="'text'" />
-    <BaseInput :label="'Password'" :type="'password'" />
-    <BaseInput :label="'Enter your password again'" :type="'password'" />
-    <BaseCheckbox :label="'I accept the agreement'" />
-    <BaseButton :name="'Sign Up'" />
+    <BaseInput label="Name" type="text" />
+    <BaseInput label="Login" type="text" />
+    <BaseInput label="Password" type="password" />
+    <BaseInput label="Enter your password again" type="password" />
+    <BaseCheckbox label="I accept the agreement" />
+    <BaseButton name="Sign Up" />
     <div class="signup__additionals">
       <span class="signup__additional-message">Already a member? </span>
       <BaseLink :href="RouteNamesEnum.signin">Sign in</BaseLink>
