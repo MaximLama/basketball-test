@@ -23,7 +23,6 @@ export default {
   padding-right: 2.5rem;
 
   &__wrapper {
-    grid-area: search_input;
     display: inline-flex;
     flex-grow: 1;
     flex-shrink: 1;

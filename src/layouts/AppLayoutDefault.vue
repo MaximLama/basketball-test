@@ -3,7 +3,11 @@
   <div class="container">
     <PrimaryMenu />
     <main class="main">
-      <slot />
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component"></component>
+        </keep-alive>
+      </router-view>
     </main>
   </div>
 </template>

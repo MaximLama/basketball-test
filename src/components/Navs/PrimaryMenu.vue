@@ -27,12 +27,12 @@ import PlayersIcon from "@/components/Icons/PlayersIcon.vue";
 const navLinks: IPrimaryMenuItemProps[] = [
   {
     svg: TeamsIcon,
-    href: RouteNamesEnum.teams,
+    href: { name: RouteNamesEnum.teams },
     name: "Teams",
   },
   {
     svg: PlayersIcon,
-    href: RouteNamesEnum.players,
+    href: { name: RouteNamesEnum.players },
     name: "Players",
   },
 ];

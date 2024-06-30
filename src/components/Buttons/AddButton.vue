@@ -16,7 +16,5 @@ export default {
 .add-btn {
   width: 6.5rem;
   flex-shrink: 0;
-  grid-area: add_button;
-  justify-self: end;
 }
 </style>

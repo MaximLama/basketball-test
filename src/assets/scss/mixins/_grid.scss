@@ -1,0 +1,35 @@
+@mixin grid {
+  .container {
+    display: flex;
+    padding: 2rem 5rem;
+  }
+
+  .card-grid {
+    display: grid;
+    width: 100%;
+    grid-template:
+      'search_input .          add_button' min-content
+      'subgrid      subgrid    subgrid' min-content
+      'pagination   pagination select' min-content
+      / 1fr 1fr 1fr;
+    grid-row-gap: 2rem;
+  }
+
+  .subgrid {
+    display: grid;
+    grid-area: subgrid;
+    grid-template-columns: repeat(auto-fit, minmax($min-team-card-w, 1fr));
+    grid-gap: 1.25vw;
+  }
+
+  .search {
+    grid-area: search_input;
+    align-self: start;
+  }
+
+  .add-btn {
+    grid-area: add_button;
+    align-self: start;
+    justify-self: end;
+  }
+}

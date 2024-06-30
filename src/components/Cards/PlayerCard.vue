@@ -5,7 +5,7 @@
     </div>
     <div class="card__bottom">
       <div class="card__text-box">
-        <span class="card__title">{{ name }} #{{ number }}</span>
+        <span class="card__title">{{ name }} <span class="card__number">#{{ number }}</span></span>
         <span class="card__subtitle">{{ team }}</span>
       </div>
     </div>
@@ -16,16 +16,10 @@
 export default {
   name: "PlayerCard",
 };
-
-interface IPlayerCardProps {
-  name: string,
-  number: number,
-  team: string,
-  photo: string
-}
 </script>
 
 <script lang="ts" setup>
+import type IPlayerCardProps from "@/interfaces/IPlayerCardProps";
 import { toRefs } from "vue";
 
 const props = defineProps<{
@@ -51,15 +45,14 @@ const { name, number, team, photo } = toRefs(props.player);
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: center;
   }
 
   &__image {
-    width: 16vw;
-    height: 16vw;
-    max-width: 9.375rem;
-    max-height: 9.375rem;
+    width: 33vw;
+    max-width: 17.13rem;
+    max-height: 13rem;
     flex-shrink: 0;
     object-fit: contain;
   }
@@ -85,6 +78,10 @@ const { name, number, team, photo } = toRefs(props.player);
     color: $white;
     font-size: 1.125rem;
     line-height: 1.54rem;
+  }
+
+  &__number {
+    color: $light-red;
   }
 }
 </style>

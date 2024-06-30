@@ -1,9 +1,13 @@
 <template>
   <div class="container">
     <div class="card-grid">
-      <SearchInput />
-      <AddButton />
-      <div class="teams">
+      <div class="search">
+        <SearchInput />
+      </div>
+      <div class="add-btn">
+        <AddButton />
+      </div>
+      <div class="subgrid">
         <TeamCard v-for="(team, index) in teams" :key="index" :team="team" />
       </div>
       <BasePagination :total="27" />
@@ -18,8 +22,8 @@ import AddButton from "@/components/Buttons/AddButton.vue";
 import TeamCard from "@/components/Cards/TeamCard.vue";
 import BasePagination from "@/components/Blocks/BasePagination.vue";
 import type ITeamCardProps from "@/interfaces/ITeamCardProps";
-import PortlandImg from "@/assets/img/POR 1.png";
-import DenverImg from "@/assets/img/DEN.png";
+import PortlandImg from "@/assets/img/teams/POR 1.png";
+import DenverImg from "@/assets/img/teams/DEN.png";
 import PaginationSelect from "@/components/Inputs/PaginationSelect.vue";
 import { ref } from "vue";
 import type { Ref } from "vue";
@@ -68,27 +72,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
-
-.container {
-  display: flex;
-  margin: 2rem 5rem;
-}
-
-.card-grid {
-  display: grid;
-  width: 100%;
-  grid-template:
-    "search_input .          add_button"
-    "teams        teams      teams"
-    "pagination   pagination select"
-    / 1fr 1fr 1fr;
-  grid-row-gap: 2rem;
-}
-
-.teams {
-  display: grid;
-  grid-area: teams;
-  grid-template-columns: repeat(auto-fit, minmax($min-team-card-w, 1fr));
-  grid-gap: 1.67vw;
-}
+@import "@/assets/scss/mixins/grid";
+@include grid;
 </style>

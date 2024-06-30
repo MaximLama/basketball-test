@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="href" :class="'nav-item'" :active-class="'active'">
+  <router-link :to="href" class="nav-item" active-class="active">
     <component class="nav-item__icon" :is="svg" />
     <span class="nav-item__text">{{ name }}</span>
   </router-link>
