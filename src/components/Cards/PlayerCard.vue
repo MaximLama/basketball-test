@@ -41,7 +41,7 @@ const { name, number, team, photo } = toRefs(props.player);
   &__top {
     height: 26.93vw;
     max-height: 17.5rem;
-    background: linear-gradient(to bottom right, #707070, #393939);
+    background: $card-gradient;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     display: flex;

@@ -6,8 +6,15 @@
 }
 
 @font-face {
-    font-family: 'Avenir Regular';
+    font-family: 'Avenir';
     src: url("@/assets/fonts/avenirnextcyr-regular.ttf") format("ttf");
     font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Avenir';
+    src: url("@/assets/fonts/avenirnextcyr-bold.ttf") format("ttf");
+    font-weight: 800;
     font-style: normal;
 }
