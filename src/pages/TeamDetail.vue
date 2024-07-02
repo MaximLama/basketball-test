@@ -19,7 +19,7 @@ import type { Ref } from "vue";
 import type ITeamDetailProps from '@/interfaces/ITeamDetailProps';
 import DenverImg from "@/assets/img/teams/DEN.png";
 import BolBolImg from "@/assets/img/players/bol-bol.png";
-import type ITeamCompositionProps from "@/interfaces/ITeamCompositionProps";
+import type IPlayerProps from "@/interfaces/IPlayerProps";
 
 const team: ITeamDetailProps = reactive({
   name: "Denver Nuggets",
@@ -29,7 +29,7 @@ const team: ITeamDetailProps = reactive({
   conference: "Western"
 });
 
-const teammates: Ref<ITeamCompositionProps[]> = ref(
+const teammates: Ref<IPlayerProps[]> = ref(
   [
     {
       name: "Bol Bol",

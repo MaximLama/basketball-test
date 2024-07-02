@@ -1,7 +1,6 @@
 <template>
   <div class="container">
-    <TeamDetailCard v-bind="team" />
-    <TeamComposition :teammates="teammates" />
+    <PlayerDetailCard v-bind="player" />
   </div>
 </template>
 
@@ -12,78 +11,26 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import TeamDetailCard from "@/components/Cards/TeamDetailCard.vue";
-import TeamComposition from "@/components/Blocks/TeamComposition.vue";
-import { reactive, ref } from "vue";
-import type { Ref } from "vue";
-import type ITeamDetailProps from '@/interfaces/ITeamDetailProps';
-import DenverImg from "@/assets/img/teams/DEN.png";
-import BolBolImg from "@/assets/img/players/bol-bol.png";
-import type ITeamCompositionProps from "@/interfaces/ITeamCompositionProps";
+import { reactive } from "vue";
+import type IPlayerDetailProps from "@/interfaces/IPlayerDetailProps";
+import JaylenAdamsImg from "@/assets/img/players/jaylenadams.png";
+import PlayerDetailCard from "@/components/Cards/PlayerDetailCard.vue";
 
-const team: ITeamDetailProps = reactive({
-  name: "Denver Nuggets",
-  img: DenverImg,
-  year: 1976,
-  division: "Northwestern",
-  conference: "Western"
+const player: IPlayerDetailProps = reactive({
+  name: "Greg Whittington",
+  position: "Forward",
+  image: JaylenAdamsImg,
+  number: 22,
+  height: 206,
+  weight: 95,
+  age: 27,
+  team: "Denver Nuggets"
 });
-
-const teammates: Ref<ITeamCompositionProps[]> = ref(
-  [
-    {
-      name: "Bol Bol",
-      position: "Centerforward",
-      image: BolBolImg,
-      number: 10,
-      height: 218,
-      weight: 100,
-      age: 21
-    },
-    {
-      name: "Bol Bol",
-      position: "Centerforward",
-      image: BolBolImg,
-      number: 10,
-      height: 218,
-      weight: 100,
-      age: 21
-    },
-    {
-      name: "Bol Bol",
-      position: "Centerforward",
-      image: BolBolImg,
-      number: 10,
-      height: 218,
-      weight: 100,
-      age: 21
-    },
-    {
-      name: "Bol Bol",
-      position: "Centerforward",
-      image: BolBolImg,
-      number: 10,
-      height: 218,
-      weight: 100,
-      age: 21
-    },
-    {
-      name: "Bol Bol",
-      position: "Centerforward",
-      image: BolBolImg,
-      number: 10,
-      height: 218,
-      weight: 100,
-      age: 21
-    }
-  ]
-);
 </script>
 
 <style lang="scss" scoped>
 .container {
-  flex-direction: column;
-  gap: 2rem;
   padding: 2rem 5rem;
+  flex-direction: column;
 }
 </style>

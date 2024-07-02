@@ -5,7 +5,7 @@
     </div>
     <div class="card__bottom">
       <div class="card__text-box">
-        <span class="card__title">{{ name }} <span class="card__number">#{{ number }}</span></span>
+        <span class="card__title">{{ name }} <span class="light-red">#{{ number }}</span></span>
         <span class="card__subtitle">{{ team }}</span>
       </div>
     </div>
@@ -78,10 +78,6 @@ const { name, number, team, photo } = toRefs(props.player);
     color: $white;
     font-size: 1.125rem;
     line-height: 1.54rem;
-  }
-
-  &__number {
-    color: $light-red;
   }
 }
 </style>

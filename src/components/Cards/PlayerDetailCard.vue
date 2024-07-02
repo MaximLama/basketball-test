@@ -2,9 +2,9 @@
   <div class="card">
     <div class="card__header">
       <div class="card__breadcrumbs">
-        <span class="breadcrumb__link">Teams</span>
+        <span class="breadcrumb__link">Players</span>
         /
-        <span class="breadcrumb__link">Denver Nuggets</span>
+        <span class="breadcrumb__link">{{ player.name }}</span>
       </div>
       <div class="card__icons">
         <EditIcon />
@@ -14,24 +14,32 @@
     <div class="card__detail">
       <div class="card__image">
         <div class="image__wrapper">
-          <img :src="team.img">
+          <img :src="player.image">
         </div>
       </div>
       <div class="card__info">
         <div class="info__item-header">
-          {{ team.name }}
+          {{ player.name }} <span class="light-red">#{{ player.number }}</span>
         </div>
         <div class="info__item">
-          <span class="info__item-title">Year of foundation</span>
-          <span>{{ team.year }}</span>
+          <span class="info__item-title">Position</span>
+          <span>{{ player.position }}</span>
         </div>
         <div class="info__item">
-          <span class="info__item-title">Division</span>
-          <span>{{ team.division }}</span>
+          <span class="info__item-title">Team</span>
+          <span>{{ player.team }}</span>
         </div>
         <div class="info__item">
-          <span class="info__item-title">Conference</span>
-          <span>{{ team.conference }}</span>
+          <span class="info__item-title">Height</span>
+          <span>{{ player.height }} cm</span>
+        </div>
+        <div class="info__item">
+          <span class="info__item-title">Weight</span>
+          <span>{{ player.weight }} kg</span>
+        </div>
+        <div class="info__item">
+          <span class="info__item-title">Age</span>
+          <span>{{ player.age }}</span>
         </div>
       </div>
     </div>
@@ -47,9 +55,9 @@ export default {
 <script lang="ts" setup>
 import EditIcon from '@/components/Icons/EditIcon.vue';
 import DeleteIcon from '@/components/Icons/DeleteIcon.vue';
-import type ITeamDetailProps from '@/interfaces/ITeamDetailProps';
+import type IPlayerDetailProps from '@/interfaces/IPlayerDetailProps';
 
-const team = defineProps<ITeamDetailProps>();
+const player = defineProps<IPlayerDetailProps>();
 </script>
 
 <style lang="scss" scoped>
@@ -88,7 +96,7 @@ const team = defineProps<ITeamDetailProps>();
   &__image {
     display: flex;
     flex-grow: 1;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
   }
 
@@ -105,8 +113,10 @@ const team = defineProps<ITeamDetailProps>();
 }
 
 .image__wrapper {
-  width: 13.125rem;
-  height: 13.125rem;
+  width: 33.19rem;
+  height: 33.19rem;
+  display: flex;
+  align-items: end;
 
   img {
     object-fit: contain;

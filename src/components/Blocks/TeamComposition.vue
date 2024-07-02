@@ -35,11 +35,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type ITeamCompositionProps from '@/interfaces/ITeamCompositionProps';
+import type IPlayerProps from '@/interfaces/IPlayerProps';
 import { toRef } from 'vue';
 
 const props = defineProps<{
-  teammates: ITeamCompositionProps[]
+  teammates: IPlayerProps[]
 }>();
 
 const teammates = toRef(() => props.teammates);

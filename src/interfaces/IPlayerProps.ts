@@ -1,4 +1,4 @@
-export default interface IPlayerDetailProps {
+export default interface IPlayerProps {
   name: string,
   position: string,
   image: string,
@@ -6,5 +6,8 @@ export default interface IPlayerDetailProps {
   height: number,
   weight: number,
   age: number,
+}
+
+export interface IPlayerDetailProps extends IPlayerProps {
   team: string
 }

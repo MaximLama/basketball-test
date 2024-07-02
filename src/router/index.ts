@@ -39,8 +39,18 @@ const routes = [
       },
       {
         path: '/players',
-        name: RouteNamesEnum.players,
-        component: () => import('@/pages/Players.vue')
+        children: [
+          {
+            path: '',
+            name: RouteNamesEnum.players,
+            component: () => import('@/pages/Players.vue')
+          },
+          {
+            path: ':id',
+            name: RouteNamesEnum.player,
+            component: () => import('@/pages/PlayerDetail.vue')
+          }
+        ]
       }
     ]
   }

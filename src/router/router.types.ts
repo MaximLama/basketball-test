@@ -3,5 +3,6 @@ export enum RouteNamesEnum {
   signup = 'signup',
   teams = 'teams',
   players = 'players',
-  team = 'team'
+  team = 'team',
+  player = 'player'
 }
