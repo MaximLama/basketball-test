@@ -8,9 +8,9 @@
     display: grid;
     width: 100%;
     grid-template:
-      'search_input .          add_button' min-content
-      'subgrid      subgrid    subgrid' min-content
-      'pagination   pagination select' min-content
+      'search_input select      add_button' min-content
+      'subgrid      subgrid     subgrid' min-content
+      'pagination   pagination  pagination_select' min-content
       / 1fr 1fr 1fr;
     grid-row-gap: 2rem;
   }
@@ -23,7 +23,14 @@
   }
 
   .search {
+    display: flex;
     grid-area: search_input;
+    align-self: start;
+  }
+
+  .select {
+    display: flex;
+    grid-area: select;
     align-self: start;
   }
 

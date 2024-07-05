@@ -4,6 +4,9 @@
       <div class="search">
         <SearchInput />
       </div>
+      <div class="select">
+        <BaseSelect :options="selectOptions" :multiple="true" />
+      </div>
       <div class="add-btn">
         <AddButton />
       </div>
@@ -30,6 +33,7 @@ import BasePagination from "@/components/Blocks/BasePagination.vue";
 import type IPlayerCardProps from "@/interfaces/IPlayerCardProps";
 import JaylenAdamsImg from "@/assets/img/players/jaylenadams.png";
 import PaginationSelect from "@/components/Inputs/PaginationSelect.vue";
+import BaseSelect from "@/components/Inputs/BaseSelect.vue";
 import { ref } from "vue";
 import type { Ref } from "vue";
 
@@ -61,6 +65,11 @@ const players: Ref<IPlayerCardProps[]> = ref([
 ]);
 
 const paginationOptions = ref([6, 12, 24]);
+const selectOptions = ref([
+  "Forward",
+  "Centralforward",
+  "Guard"
+]);
 </script>
 
 <style lang="scss" scoped>

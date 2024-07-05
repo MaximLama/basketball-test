@@ -1,5 +1,5 @@
 <template>
-  <div class="pagination-select">
+  <div class="pagination-select" v-click-outside="() => active = false">
     <div class="selected__wrapper" @click.prevent="active = !active">
       <span class="selected__text">{{ selected }}</span>
       <div class="selected__icon-wrapper">
@@ -44,7 +44,7 @@ const active = ref(false);
 @import "@/assets/scss/variables";
 
 .pagination-select {
-  grid-area: select;
+  grid-area: pagination_select;
   justify-self: end;
   position: relative;
 }
