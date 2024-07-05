@@ -31,9 +31,14 @@ const routes = [
             component: () => import('@/pages/Teams.vue')
           },
           {
-            path: ':id',
+            path: ':id(\d+)',
             name: RouteNamesEnum.team,
             component: () => import('@/pages/TeamDetail.vue')
+          },
+          {
+            path: 'add',
+            name: RouteNamesEnum.addTeam,
+            component: () => import('@/pages/AddTeam.vue')
           }
         ]
       },

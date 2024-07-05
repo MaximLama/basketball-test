@@ -4,5 +4,6 @@ export enum RouteNamesEnum {
   teams = 'teams',
   players = 'players',
   team = 'team',
-  player = 'player'
+  player = 'player',
+  addTeam = 'addTeam'
 }
