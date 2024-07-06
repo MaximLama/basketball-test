@@ -1,11 +1,7 @@
 <template>
   <div class="card">
     <div class="card__header">
-      <div class="card__breadcrumbs">
-        <span class="breadcrumb__link">Teams</span>
-        /
-        <span class="breadcrumb__link">Denver Nuggets</span>
-      </div>
+      <Breadcrumbs :breadcrumbs="breadcrumbs" />
       <div class="card__icons">
         <EditIcon />
         <DeleteIcon />
@@ -48,8 +44,24 @@ export default {
 import EditIcon from '@/components/Icons/EditIcon.vue';
 import DeleteIcon from '@/components/Icons/DeleteIcon.vue';
 import type ITeamDetailProps from '@/interfaces/ITeamDetailProps';
+import type BreadCrumbsProps from '@/interfaces/BreadcrumbsProps';
+import Breadcrumbs from '@/components/Blocks/Breadcrumbs.vue';
+import { ref } from 'vue';
+import { RouteNamesEnum } from '@/router/router.types';
 
 const team = defineProps<ITeamDetailProps>();
+
+const breadcrumbs = ref<BreadCrumbsProps[]>([
+  {
+    text: "Teams",
+    href: {
+      name: RouteNamesEnum.teams
+    }
+  },
+  {
+    text: team.name
+  }
+])
 </script>
 
 <style lang="scss" scoped>

@@ -24,8 +24,8 @@ import ProfileImage from "@/assets/img/profile.jpg";
   display: flex;
   align-items: center;
 
-  &__name {
-    color: $dark-grey;
+  @media (max-width: 900px) {
+    display: none;
   }
 
   &__image {

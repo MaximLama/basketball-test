@@ -1,22 +1,5 @@
 <template>
-  <div class="container">
-    <div class="card-grid">
-      <div class="search">
-        <SearchInput />
-      </div>
-      <div class="select">
-        <BaseSelect :options="selectOptions" :multiple="true" />
-      </div>
-      <div class="add-btn">
-        <AddButton />
-      </div>
-      <div class="subgrid">
-        <PlayerCard v-for="(player, index) in players" :key="index" :player="player" />
-      </div>
-      <BasePagination :total="27" />
-      <PaginationSelect :options="paginationOptions" />
-    </div>
-  </div>
+  <PlayerCard v-for="(player, index) in players" :key="index" :player="player" />
 </template>
 
 <script lang="ts">
@@ -26,18 +9,12 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import SearchInput from "@/components/Inputs/SearchInput.vue";
-import AddButton from "@/components/Buttons/AddButton.vue";
 import PlayerCard from "@/components/Cards/PlayerCard.vue";
-import BasePagination from "@/components/Blocks/BasePagination.vue";
 import type IPlayerCardProps from "@/interfaces/IPlayerCardProps";
 import JaylenAdamsImg from "@/assets/img/players/jaylenadams.png";
-import PaginationSelect from "@/components/Inputs/PaginationSelect.vue";
-import BaseSelect from "@/components/Inputs/BaseSelect.vue";
-import { ref } from "vue";
-import type { Ref } from "vue";
+import { onMounted, ref } from "vue";
 
-const players: Ref<IPlayerCardProps[]> = ref([
+const players = ref<IPlayerCardProps[]>([
   {
     name: "Jaylen Adams",
     number: 10,
@@ -64,16 +41,15 @@ const players: Ref<IPlayerCardProps[]> = ref([
   },
 ]);
 
-const paginationOptions = ref([6, 12, 24]);
-const selectOptions = ref([
+const props = defineProps<{
+  setSelectOptions: (options: string[]) => void
+}>();
+
+const selectOptions = [
   "Forward",
   "Centralforward",
   "Guard"
-]);
-</script>
+];
 
-<style lang="scss" scoped>
-@import "@/assets/scss/variables";
-@import "@/assets/scss/mixins/grid";
-@include grid;
-</style>
+onMounted(() => props.setSelectOptions(selectOptions))
+</script>

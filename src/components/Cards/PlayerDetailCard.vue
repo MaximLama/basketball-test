@@ -1,11 +1,7 @@
 <template>
   <div class="card">
     <div class="card__header">
-      <div class="card__breadcrumbs">
-        <span class="breadcrumb__link">Players</span>
-        /
-        <span class="breadcrumb__link">{{ player.name }}</span>
-      </div>
+      <Breadcrumbs :breadcrumbs="breadcrumbs" />
       <div class="card__icons">
         <EditIcon />
         <DeleteIcon />
@@ -56,8 +52,24 @@ export default {
 import EditIcon from '@/components/Icons/EditIcon.vue';
 import DeleteIcon from '@/components/Icons/DeleteIcon.vue';
 import type IPlayerDetailProps from '@/interfaces/IPlayerDetailProps';
+import type BreadCrumbsProps from '@/interfaces/BreadcrumbsProps';
+import Breadcrumbs from '@/components/Blocks/Breadcrumbs.vue';
+import { ref } from 'vue';
+import { RouteNamesEnum } from '@/router/router.types';
 
 const player = defineProps<IPlayerDetailProps>();
+
+const breadcrumbs = ref<BreadCrumbsProps[]>([
+  {
+    text: "Players",
+    href: {
+      name: RouteNamesEnum.players
+    }
+  },
+  {
+    text: player.name
+  }
+]);
 </script>
 
 <style lang="scss" scoped>
@@ -106,10 +118,6 @@ const player = defineProps<IPlayerDetailProps>();
     grid-template-columns: repeat(2, auto);
     margin: 4.0625rem 0;
   }
-}
-
-.breadcrumb__link {
-  color: $red;
 }
 
 .image__wrapper {

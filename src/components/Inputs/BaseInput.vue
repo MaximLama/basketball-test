@@ -7,6 +7,7 @@
         'input--password': type === 'password',
       }" :type="type" v-model="model" :disabled="disabled" />
       <span class="input__eye" v-if="type === 'password'"></span>
+      <span class="input__date" v-if="type === 'date'"></span>
     </div>
     <span class="input__error-msg">{{ error }}</span>
   </div>
@@ -51,9 +52,14 @@ const model = defineModel<string>();
   background-color: $lightest-grey1;
   padding: 0.375rem 0.75rem;
   position: relative;
+  width: 100%;
 
   &:hover {
     background-color: $lightest-grey;
+
+    &~.input__date {
+      background-color: $lightest-grey;
+    }
   }
 
   &:focus {
@@ -90,9 +96,23 @@ const model = defineModel<string>();
     transform: translateY(-50%);
   }
 
+  &__date {
+    background: url("@/assets/img/icons/calendar_blank.svg") 0 0 no-repeat;
+    background-color: $lightest-grey1;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
   &__wrapper {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 
   &__label {

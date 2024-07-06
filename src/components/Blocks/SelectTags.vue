@@ -32,7 +32,6 @@ const tags = toRef(() => props.tags);
 const tagsEl = ref<HTMLElement | null>(null);
 
 const handleTags = () => {
-  console.log("start handle");
   if (!tagsEl.value) return;
   const tagsCollection = tagsEl.value.children;
   const tagsBounds = tagsEl.value.getBoundingClientRect();
@@ -50,7 +49,6 @@ const handleTags = () => {
     const tagEl = tagsCollection.item(i);
     if (!tagEl) continue;
     const tagBound = tagEl.getBoundingClientRect();
-    console.log(tagEl, Math.round(tagsBounds.right), Math.round(tagBound.right));
     if (Math.round(tagsBounds.right) >= Math.round(tagBound.right) && tagEl.classList.contains('hide')) {
       tagEl.classList.remove('hide');
     }

@@ -1,34 +1,15 @@
 <template>
-  <div class="container">
-    <div class="card-grid">
-      <div class="search">
-        <SearchInput />
-      </div>
-      <div class="add-btn">
-        <AddButton />
-      </div>
-      <div class="subgrid">
-        <TeamCard v-for="(team, index) in teams" :key="index" :team="team" />
-      </div>
-      <BasePagination :total="27" />
-      <PaginationSelect :options="paginationOptions" />
-    </div>
-  </div>
+  <TeamCard v-for="(team, index) in teams" :key="index" :team="team" />
 </template>
 
 <script lang="ts" setup>
-import SearchInput from "@/components/Inputs/SearchInput.vue";
-import AddButton from "@/components/Buttons/AddButton.vue";
 import TeamCard from "@/components/Cards/TeamCard.vue";
-import BasePagination from "@/components/Blocks/BasePagination.vue";
 import type ITeamCardProps from "@/interfaces/ITeamCardProps";
 import PortlandImg from "@/assets/img/teams/POR 1.png";
 import DenverImg from "@/assets/img/teams/DEN.png";
-import PaginationSelect from "@/components/Inputs/PaginationSelect.vue";
 import { ref } from "vue";
-import type { Ref } from "vue";
 
-const teams: Ref<ITeamCardProps[]> = ref([
+const teams = ref<ITeamCardProps[]>([
   {
     name: "Portland trail blazers",
     year: 1970,
@@ -61,7 +42,9 @@ const teams: Ref<ITeamCardProps[]> = ref([
   },*/
 ]);
 
-const paginationOptions = ref([6, 12, 24]);
+defineProps<{
+  setSelectOptions: (options: string[]) => void
+}>();
 </script>
 
 <script lang="ts">
@@ -69,9 +52,3 @@ export default {
   name: "Teams",
 };
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/scss/variables";
-@import "@/assets/scss/mixins/grid";
-@include grid;
-</style>

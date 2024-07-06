@@ -27,11 +27,17 @@ const routes = [
         children: [
           {
             path: '',
-            name: RouteNamesEnum.teams,
-            component: () => import('@/pages/Teams.vue')
+            component: () => import('@/layouts/AppLayoutContent.vue'),
+            children: [
+              {
+                path: '',
+                name: RouteNamesEnum.teams,
+                component: () => import('@/pages/Teams.vue')
+              },
+            ]
           },
           {
-            path: ':id(\d+)',
+            path: ':id(\\d+)',
             name: RouteNamesEnum.team,
             component: () => import('@/pages/TeamDetail.vue')
           },
@@ -47,13 +53,27 @@ const routes = [
         children: [
           {
             path: '',
-            name: RouteNamesEnum.players,
-            component: () => import('@/pages/Players.vue')
+            component: () => import('@/layouts/AppLayoutContent.vue'),
+            meta: {
+              showSelect: true
+            },
+            children: [
+              {
+                path: '',
+                name: RouteNamesEnum.players,
+                component: () => import('@/pages/Players.vue')
+              },
+            ]
           },
           {
-            path: ':id',
+            path: ':id(\\d+)',
             name: RouteNamesEnum.player,
             component: () => import('@/pages/PlayerDetail.vue')
+          },
+          {
+            path: 'add',
+            name: RouteNamesEnum.addPlayer,
+            component: () => import('@/pages/AddPlayer.vue')
           }
         ]
       }

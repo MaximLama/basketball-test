@@ -2,7 +2,7 @@
   <div class="input__wrapper">
     <label class="input__label"> {{ label }}</label>
     <div class="input__inner">
-      <BaseSelect :options="options" />
+      <BaseSelect :options="options" selectClass="input__select" hoverSelectClass="input__select--hover" />
       <!--input class="input" :class="{
         'input--error': error !== '',
         'input--password': type === 'password',
@@ -61,5 +61,10 @@ const { label, options, error } = toRefs(props);
     color: $lightest-red;
     margin-top: 2px;
   }
+}
+
+:deep(.input__select) {
+  background-color: $lightest-grey1;
+  border: none;
 }
 </style>

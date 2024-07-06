@@ -1,6 +1,6 @@
 <template>
   <div class="select" v-click-outside="() => active = false">
-    <div class="selected__wrapper" @click.prevent="active = !active">
+    <div class="selected__wrapper" :class="[selectClass]" @click.prevent="active = !active">
       <div class="selected">
         <span v-show="activePlaceholder">{{ placeholder }}</span>
         <span class="selected__text" v-show="!multiple && selected">{{ selected }}</span>
@@ -27,6 +27,7 @@ export default {
 interface BaseSelectProps {
   options: string[];
   multiple?: boolean;
+  selectClass?: string;
 }
 </script>
 
@@ -37,10 +38,11 @@ import ClearIcon from '@/components/Icons/ClearIcon.vue';
 import SelectTags from '@/components/Blocks/SelectTags.vue';
 
 const props = withDefaults(defineProps<BaseSelectProps>(), {
-  multiple: false
+  multiple: false,
+  selectClass: '',
 });
 
-const { options, multiple } = toRefs(props);
+const { options, multiple, selectClass } = toRefs(props);
 
 const placeholder = ref("Select..");
 
@@ -90,6 +92,7 @@ const activeClear = computed<boolean>(() => {
   position: relative;
   height: 2.5rem;
   background-color: $white;
+  border-radius: 0.25rem;
 
   &:hover {
     background: $lightest-grey1;
@@ -108,6 +111,7 @@ const activeClear = computed<boolean>(() => {
     border-radius: 0.25rem;
     padding-left: 0.75rem;
     max-width: 22.75rem;
+
   }
 
   &__tags {
@@ -154,6 +158,7 @@ const activeClear = computed<boolean>(() => {
   flex-direction: column;
   width: 100%;
   top: 2.75rem;
+  z-index: 1;
 }
 
 .active {

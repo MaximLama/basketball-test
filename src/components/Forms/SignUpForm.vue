@@ -5,7 +5,7 @@
     <BaseInput label="Login" type="text" />
     <BaseInput label="Password" type="password" />
     <BaseInput label="Enter your password again" type="password" />
-    <BaseCheckbox label="I accept the agreement" />
+    <BaseCheckbox label="I accept the agreement" id="agreement" />
     <BaseButton name="Sign Up" />
     <div class="signup__additionals">
       <span class="signup__additional-message">Already a member? </span>

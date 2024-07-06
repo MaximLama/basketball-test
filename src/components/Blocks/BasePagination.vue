@@ -57,7 +57,6 @@ const props = defineProps<BasePaginationProps>();
 const total = toRef(() => props.total);
 
 const route = useRoute();
-console.log(route.query.page);
 const current = computed(() => {
   return route.query.page
     ? parseInt(route.query.page as unknown as string)
