@@ -2,7 +2,7 @@
   <div class="container">
     <div class="block">
       <div class="breadcrumbs__wrapper">
-        <Breadcrumbs :breadcrumbs="breadcrumbs" />
+        <BaseBreadcrumbs :breadcrumbs="breadcrumbs" />
       </div>
       <AddPlayerForm />
     </div>
@@ -17,7 +17,7 @@ export default {
 
 <script lang="ts" setup>
 import AddPlayerForm from "@/components/Forms/AddPlayerForm.vue";
-import Breadcrumbs from "@/components/Blocks/Breadcrumbs.vue";
+import BaseBreadcrumbs from "@/components/Blocks/BaseBreadcrumbs.vue";
 import type BreadCrumbsProps from "@/interfaces/BreadcrumbsProps";
 import { ref } from "vue";
 import { RouteNamesEnum } from "@/router/router.types";

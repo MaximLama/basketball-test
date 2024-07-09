@@ -34,9 +34,12 @@ export default {
 
 .card {
   display: flex;
-  flex-grow: 1;
   min-width: $min-team-card-w;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    min-width: 0;
+  }
 
   &__top {
     height: 26.93vw;
@@ -79,6 +82,7 @@ export default {
     color: $white;
     font-size: 1.125rem;
     line-height: 1.54rem;
+    text-align: center;
   }
 }
 </style>

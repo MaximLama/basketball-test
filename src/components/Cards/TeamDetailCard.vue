@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card__header">
-      <Breadcrumbs :breadcrumbs="breadcrumbs" />
+      <BaseBreadcrumbs :breadcrumbs="breadcrumbs" />
       <div class="card__icons">
         <EditIcon />
         <DeleteIcon />
@@ -45,7 +45,7 @@ import EditIcon from '@/components/Icons/EditIcon.vue';
 import DeleteIcon from '@/components/Icons/DeleteIcon.vue';
 import type ITeamDetailProps from '@/interfaces/ITeamDetailProps';
 import type BreadCrumbsProps from '@/interfaces/BreadcrumbsProps';
-import Breadcrumbs from '@/components/Blocks/Breadcrumbs.vue';
+import BaseBreadcrumbs from '@/components/Blocks/BaseBreadcrumbs.vue';
 import { ref } from 'vue';
 import { RouteNamesEnum } from '@/router/router.types';
 

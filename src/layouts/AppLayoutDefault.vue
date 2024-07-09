@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <BaseHeader />
   <div class="container">
     <PrimaryMenu />
     <main class="main">
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import Header from "@/components/Blocks/Header.vue";
+import BaseHeader from "@/components/Blocks/BaseHeader.vue";
 import PrimaryMenu from "@/components/Navs/PrimaryMenu.vue";
 </script>
 
@@ -21,14 +21,18 @@ import PrimaryMenu from "@/components/Navs/PrimaryMenu.vue";
 @import "@/assets/scss/variables";
 
 .container {
+  position: relative;
   display: flex;
   width: 100%;
-  min-height: calc(100vh - $header-height);
+  min-height: calc(100vh - $header-h);
+
+  @media (max-width: 1050px) {
+    padding-top: $header-h-1050;
+  }
 }
 
 .main {
   flex-grow: 1;
   background-color: $lightest-grey1;
-  //padding: 2rem 4.17vw;
 }
 </style>

@@ -21,7 +21,7 @@ interface ITagsProps {
 </script>
 
 <script lang="ts" setup>
-import { toRef, ref, onUpdated, type Ref, onMounted } from 'vue';
+import { toRef, ref, onUpdated, onMounted } from 'vue';
 import ClearIcon from '@/components/Icons/ClearIcon.vue';
 
 const props = withDefaults(defineProps<ITagsProps>(), {
@@ -64,7 +64,7 @@ const handleTags = () => {
   const hiddenTags = tagsEl.value.querySelectorAll('.hide');
   if (hiddenTags.length > 0) {
     if (Math.round(moreTagBounds.right) > Math.round(tagsBounds.right)) {
-      const visibleTags = tagsEl.value.querySelectorAll('.tag:not(.hide)');
+      const visibleTags = tagsEl.value.querySelectorAll('.tag:not(.hide):not(.more)');
       const lastVisibleTag = visibleTags.length ? visibleTags.item(visibleTags.length - 1) : null;
       if (lastVisibleTag) {
         lastVisibleTag.classList.add('hide');
@@ -93,7 +93,8 @@ defineEmits<{
   display: flex;
   gap: 0.25rem;
   overflow: hidden;
-  max-width: 17rem;
+  width: 17rem;
+  flex-grow: 1;
 }
 
 .tag {

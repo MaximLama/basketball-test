@@ -7,7 +7,7 @@
 
 <script lang="ts">
 export default {
-  name: "Upload"
+  name: "UploadInput"
 }
 </script>
 

@@ -1,7 +1,11 @@
-@import "variables";
-@import "fonts";
-@import "reset";
+@import 'variables';
+@import 'fonts';
+@import 'reset';
 
 .light-red {
   color: $light-red;
+}
+
+.no-scroll {
+  overflow: hidden;
 }

@@ -12,7 +12,7 @@
 
 <script lang="ts">
 export default {
-  name: "Breadcrumbs"
+  name: "BaseBreadcrumbs"
 }
 </script>
 

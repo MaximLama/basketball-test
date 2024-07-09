@@ -6,6 +6,7 @@ $light-grey: #9c9c9c;
 $lightest-grey: #d1d1d1;
 $lightest-grey1: #f6f6f6;
 $shadow-grey: #d9d9d9;
+$overlay-grey: #414141;
 $dark-red: #c60e2e;
 $red: #e4163a;
 $light-red: #ff5761;
@@ -20,8 +21,63 @@ $primary-font: 'Avenir', sans-serif;
 
 /*** SIZES ***/
 
-$header-height: 5rem;
+$header-h: 5rem;
+$header-h-1050: 3.875rem;
+
+$header-p: 0 3.375rem 0 3.1875rem;
+$header-p-1050: 0;
+
+$logo-w: 11.9375rem;
+$logo-w-1050: 8.5625rem;
+
+$logo-h: 3rem;
+$logo-h-1050: 2.125rem;
+
 $min-team-card-w: 22.75rem;
+
+$container-padding: 2rem 5rem;
+$container-padding-1050: 1rem 0.75rem;
+
+$max-input-w: 22.5rem;
+
+$pagination-gap: 1rem;
+$pagination-gap-768: 0.3rem;
+
+$pagination-item-size: 2.5rem;
+$pagination-item-size-768: 1.75rem;
+
+$pagination-select-w: 5.5rem;
+$pagination-select-w-768: 3.75rem;
+
+$pagination-select-h: 2.5rem;
+$pagination-select-h-768: 1.75rem;
+
+$pagination-select-icon-size: 1.5rem;
+$pagination-select-icon-size-768: 1rem;
+
+$pagination-separator-gap: -6px;
+$pagination-separator-gap-768: -0.25rem;
+
+$pagination-ml: 0.75rem;
+$pagination-ml-768: 0.5rem;
+
+$add-btn-w: 6.5rem;
+$add-btn-w-875: 100%;
+
+$grid-row-gap: 2rem;
+$grid-row-gap-875: 0;
+$grid-mb-875: 1rem;
 
 /*** BORDERS ***/
 $default-border: 0.5px solid $light-grey;
+
+/*** GRID ***/
+$grid-template: 'search_input select      add_button' min-content 'subgrid      subgrid     subgrid'
+  min-content 'pagination   pagination  pagination_select' min-content / max-content max-content 1fr;
+$grid-template-875: 'search_input search_input search_input' min-content
+  'select       select       select' min-content 'add_button   add_button   add_button' min-content
+  'subgrid      subgrid      subgrid' min-content 'pagination   pagination   pagination_select'
+  min-content / 1fr 1fr 1fr;
+
+$subgrid-columns: repeat(auto-fit, minmax($min-team-card-w, 1fr));
+$subgrid-columns-768: repeat(2, 1fr);

@@ -107,10 +107,16 @@ const next = () => {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/variables";
+
 .pagination {
   display: flex;
-  gap: 1rem;
+  gap: $pagination-gap;
   grid-area: pagination;
+
+  @media (max-width: 768px) {
+    gap: $pagination-gap-768;
+  }
 
   &__gap,
   &__button {
@@ -119,8 +125,13 @@ const next = () => {
     align-items: center;
     justify-content: center;
     border-radius: 0.25rem;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: $pagination-item-size;
+    height: $pagination-item-size;
+
+    @media (max-width: 768px) {
+      width: $pagination-item-size-768;
+      height: $pagination-item-size-768;
+    }
   }
 
   &__button {

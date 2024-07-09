@@ -14,7 +14,9 @@
       </div>
     </div>
     <div class="items" :class="{ 'active': active }">
-      <div class="item" v-for="option in options" :key="option" @click.prevent="select(option)">{{ option }}</div>
+      <div class="item" v-for="option in options" :key="option" @click.prevent="select(option)"
+        :class="{ active: tags.has(option) }">{{
+          option }}</div>
     </div>
   </div>
 </template>
@@ -32,7 +34,7 @@ interface BaseSelectProps {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, toRefs, watch, type Ref } from 'vue';
+import { computed, ref, toRefs, type Ref } from 'vue';
 import SelectArrow from '@/components/Icons/SelectArrow.vue';
 import ClearIcon from '@/components/Icons/ClearIcon.vue';
 import SelectTags from '@/components/Blocks/SelectTags.vue';
@@ -56,7 +58,7 @@ const tags: Ref<Set<string>> = ref(new Set());
 
 const select = computed<(value: string) => void>(() => {
   return multiple.value
-    ? (value: string) => tags.value.add(value)
+    ? (value: string) => tags.value.has(value) ? tags.value.delete(value) : tags.value.add(value)
     : (value: string) => {
       selected.value = value;
       active.value = false;
@@ -88,7 +90,8 @@ const activeClear = computed<boolean>(() => {
 .select {
   display: flex;
   flex-grow: 1;
-  max-width: 22.75rem;
+  flex-shrink: 1;
+  width: 22.75rem;
   position: relative;
   height: 2.5rem;
   background-color: $white;
@@ -100,8 +103,9 @@ const activeClear = computed<boolean>(() => {
 }
 
 .selected {
+  display: flex;
   align-items: center;
-  margin-right: auto;
+  flex-grow: 1;
 
   &__wrapper {
     display: flex;
@@ -110,7 +114,6 @@ const activeClear = computed<boolean>(() => {
     border: 0.5px solid $lightest-grey;
     border-radius: 0.25rem;
     padding-left: 0.75rem;
-    max-width: 22.75rem;
 
   }
 
@@ -187,10 +190,18 @@ const activeClear = computed<boolean>(() => {
     border-bottom-right-radius: 0.25rem;
   }
 
-  &:hover {
-    background: $dark-red;
+  &:hover,
+  &.active {
     color: $white;
     cursor: pointer;
+  }
+
+  &:hover {
+    background: $red;
+  }
+
+  &.active {
+    background: $dark-red;
   }
 }
 
@@ -218,7 +229,7 @@ const activeClear = computed<boolean>(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0.75rem;
+  padding: 0 0.75rem;
   cursor: pointer;
 }
 </style>

@@ -24,7 +24,7 @@ import ProfileImage from "@/assets/img/profile.jpg";
   display: flex;
   align-items: center;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1050px) {
     display: none;
   }
 

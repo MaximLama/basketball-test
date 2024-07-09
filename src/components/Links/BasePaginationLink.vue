@@ -43,8 +43,13 @@ const isActive = computed(() => {
   align-items: center;
   justify-content: center;
   border-radius: 0.25rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: $pagination-item-size;
+  height: $pagination-item-size;
+
+  @media (max-width: 768px) {
+    width: $pagination-item-size-768;
+    height: $pagination-item-size-768;
+  }
 
   &.active {
     background-color: $red;

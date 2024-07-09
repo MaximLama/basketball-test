@@ -4,6 +4,7 @@
 
 <script lang="ts">
 export default {
+  // eslint-disable-next-line vue/multi-word-component-names
   name: "Players",
 };
 </script>
@@ -48,7 +49,12 @@ const props = defineProps<{
 const selectOptions = [
   "Forward",
   "Centralforward",
-  "Guard"
+  "Guard",
+  "AAAAAAAAA",
+  "BBBBBBBBB",
+  "CCCCCCCCC",
+  "DDDDDDDDD",
+  "EEEEEEEEE"
 ];
 
 onMounted(() => props.setSelectOptions(selectOptions))

@@ -55,24 +55,38 @@ const active = ref(false);
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    width: 5.5rem;
-    height: 2.5rem;
+    width: $pagination-select-w;
+    height: $pagination-select-h;
     border: 0.5px solid $lightest-grey;
     border-radius: 0.25rem;
     color: $dark-grey;
     padding: 6px;
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      width: $pagination-select-w-768;
+      height: $pagination-select-h-768;
+    }
   }
 
   &__text {
-    margin-left: 0.75rem;
+    margin-left: $pagination-ml;
+
+    @media (max-width: 768px) {
+      margin-left: $pagination-ml-768;
+    }
   }
 
   &__icon {
     flex-shrink: 0;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: $pagination-select-icon-size;
+    width: $pagination-select-icon-size;
     fill: $light-grey;
+
+    @media (max-width: 768px) {
+      height: $pagination-select-icon-size-768;
+      width: $pagination-select-icon-size-768;
+    }
 
     &-wrapper {
       margin-left: auto;
@@ -81,12 +95,16 @@ const active = ref(false);
 
       &::before {
         position: relative;
-        left: -6px;
+        left: $pagination-separator-gap;
         display: block;
         content: '';
         width: 0.5px;
         height: 1.5rem;
         background-color: $light-grey;
+
+        @media (max-width: 768px) {
+          left: $pagination-separator-gap-768;
+        }
       }
     }
   }
@@ -96,15 +114,24 @@ const active = ref(false);
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  width: 5.5rem;
-  height: 2.5rem;
+  width: $pagination-select-w;
+  height: $pagination-select-h;
   border: 0.5px solid $lightest-grey;
   color: $light-grey;
   padding: 6px;
   cursor: pointer;
 
+  @media (max-width: 768px) {
+    width: $pagination-select-w-768;
+    height: $pagination-select-h-768;
+  }
+
   &__text {
-    margin-left: 0.75rem;
+    margin-left: $pagination-ml;
+
+    @media (max-width: 768px) {
+      margin-left: $pagination-ml-768;
+    }
   }
 
   &:first-of-type {

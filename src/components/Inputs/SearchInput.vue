@@ -26,7 +26,7 @@ export default {
     display: inline-flex;
     flex-grow: 1;
     flex-shrink: 1;
-    max-width: 22.75rem;
+    width: $max-input-w;
     position: relative;
   }
 

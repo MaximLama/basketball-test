@@ -13,8 +13,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/variables";
+
 .add-btn {
-  width: 6.5rem;
+  display: flex;
+  width: $add-btn-w;
   flex-shrink: 0;
+
+  @media (max-width: 875px) {
+    width: $add-btn-w-875;
+  }
 }
 </style>
