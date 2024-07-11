@@ -4,7 +4,7 @@
       <div class="breadcrumbs__wrapper">
         <BaseBreadcrumbs :breadcrumbs="breadcrumbs" />
       </div>
-      <AddPlayerForm />
+      <PlayerForm />
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import AddPlayerForm from "@/components/Forms/AddPlayerForm.vue";
+import PlayerForm from "@/components/Forms/PlayerForm.vue";
 import BaseBreadcrumbs from "@/components/Blocks/BaseBreadcrumbs.vue";
 import type BreadCrumbsProps from "@/interfaces/BreadcrumbsProps";
 import { ref } from "vue";
@@ -37,20 +37,6 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
-
-.container {
-  padding: 2rem 5rem;
-  flex-direction: column;
-}
-
-.block {
-  display: flex;
-  flex-direction: column;
-  background: $white;
-  border-radius: 0.625rem;
-}
-
-.breadcrumbs__wrapper {
-  padding: 1.5rem 2rem;
-}
+@import "@/assets/scss/mixins/base-form/base-form-page";
+@include base-form-page;
 </style>

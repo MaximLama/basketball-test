@@ -25,6 +25,7 @@ import PrimaryMenu from "@/components/Navs/PrimaryMenu.vue";
   display: flex;
   width: 100%;
   min-height: calc(100vh - $header-h);
+  padding-top: $header-h;
 
   @media (max-width: 1050px) {
     padding-top: $header-h-1050;
@@ -34,5 +35,10 @@ import PrimaryMenu from "@/components/Navs/PrimaryMenu.vue";
 .main {
   flex-grow: 1;
   background-color: $lightest-grey1;
+  margin-left: $nav-width;
+
+  @media (max-width: 1050px) {
+    margin-left: 0;
+  }
 }
 </style>

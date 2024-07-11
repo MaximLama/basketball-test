@@ -6,5 +6,6 @@ type IconComponent = DefineComponent<{}, {}, any>
 export default interface IPrimaryMenuItemProps {
   svg: IconComponent
   href: RouteLocationAsRelativeGeneric
+  baseRoute: RouteLocationAsRelativeGeneric
   name: string
 }

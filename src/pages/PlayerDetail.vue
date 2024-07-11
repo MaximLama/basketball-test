@@ -29,8 +29,14 @@ const player: IPlayerDetailProps = reactive({
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/variables";
+
 .container {
-  padding: 2rem 5rem;
+  padding: $container-p;
   flex-direction: column;
+
+  @media (max-width: 1050px) {
+    padding: $container-p-1050;
+  }
 }
 </style>

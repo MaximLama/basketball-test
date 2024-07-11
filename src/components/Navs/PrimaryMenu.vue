@@ -1,7 +1,7 @@
 <template>
   <aside class="nav" :class="{ 'nav--active': isMobileMenuShown }">
-    <PrimaryMenuItem v-for="({ svg, href, name }, index) in navLinks" :key="index" :svg="svg" :href="href"
-      :name="name" />
+    <PrimaryMenuItem v-for="({ svg, href, name, baseRoute }, index) in navLinks" :key="index" :svg="svg" :href="href"
+      :name="name" :base-route="baseRoute" />
     <SignOut />
   </aside>
   <div class="overlay" :class="{ 'active': isMobileMenuShown }" @click.prevent="hideMainMenu"></div>
@@ -29,11 +29,13 @@ const navLinks: IPrimaryMenuItemProps[] = [
   {
     svg: TeamsIcon,
     href: { name: RouteNamesEnum.teams },
+    baseRoute: { name: RouteNamesEnum.teamsBase },
     name: "Teams",
   },
   {
     svg: PlayersIcon,
     href: { name: RouteNamesEnum.players },
+    baseRoute: { name: RouteNamesEnum.playersBase },
     name: "Players",
   },
 ];
@@ -64,9 +66,11 @@ export default {
 @import "@/assets/scss/variables";
 
 .nav {
+  position: fixed;
   display: flex;
   flex-direction: column;
-  width: 8.75rem;
+  height: calc(100vh - $header-h);
+  width: $nav-width;
   flex-shrink: 0;
   padding: 2rem;
   gap: 2.25rem;
@@ -83,9 +87,8 @@ export default {
   &--active {
     @media (max-width: 1050px) {
       display: flex;
-      position: fixed;
       z-index: 2;
-      height: calc(100vh - $header-h-1050);
+      height: calc(100vh - $header-h);
     }
   }
 }

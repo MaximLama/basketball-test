@@ -24,7 +24,7 @@ export default {
 @import "@/assets/scss/variables";
 
 .header {
-  position: relative;
+  position: fixed;
   display: flex;
   height: $header-h;
   width: 100%;
@@ -36,7 +36,6 @@ export default {
   background: $white;
 
   @media (max-width: 1050px) {
-    position: fixed;
     height: $header-h-1050;
     padding: $header-p-1050;
     justify-content: space-around;

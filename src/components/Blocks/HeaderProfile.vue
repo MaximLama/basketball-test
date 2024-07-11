@@ -1,8 +1,9 @@
 <template>
   <div class="header-profile">
-    <span class="header-profile__name">John Smith</span>
+    <span class="header-profile__name">{{ user.name }}</span>
     <div class="header-profile__image-box">
-      <img :src="ProfileImage" alt="" class="header-profile__image" />
+      <img :src="user.avatarUrl && user.avatarUrl !== 'null' ? user.avatarUrl : DefaultProfileImage" alt=""
+        class="header-profile__image" />
     </div>
   </div>
 </template>
@@ -14,7 +15,11 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import ProfileImage from "@/assets/img/profile.jpg";
+import DefaultProfileImage from "@/assets/img/profile.jpg";
+import { useUserStore } from "@/stores/user";
+import { storeToRefs } from "pinia";
+
+const { user } = storeToRefs(useUserStore());
 </script>
 
 <style lang="scss" scoped>

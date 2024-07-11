@@ -1,5 +1,5 @@
 <template>
-  <div class="signout">
+  <div class="signout" @click.prevent="logout">
     <div class="signout__icon">
       <SignOutIcon />
     </div>
@@ -15,6 +15,8 @@ export default {
 
 <script lang="ts" setup>
 import SignOutIcon from '@/components/Icons/SignOutIcon.vue';
+import useLogout from '@/composables/auth/logout';
+const { logout } = useLogout();
 </script>
 
 <style lang="scss" scoped>

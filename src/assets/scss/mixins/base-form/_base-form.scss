@@ -1,0 +1,52 @@
+@mixin base-form {
+  .form {
+    display: flex;
+    flex-grow: 1;
+    padding: $add-form-p;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      padding: $add-form-p-900;
+    }
+  }
+
+  .left {
+    display: flex;
+    width: $add-form-w;
+    justify-content: center;
+    align-items: start;
+
+    @media (max-width: 900px) {
+      width: $add-form-w-900;
+      margin-bottom: $add-form-upload-mb-900;
+    }
+  }
+
+  .right {
+    display: flex;
+    width: $add-form-w;
+
+    @media (max-width: 900px) {
+      width: $add-form-w-900;
+      justify-content: center;
+    }
+
+    &__inner {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      max-width: 22.875rem;
+      gap: 1.5rem;
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-grow: 1;
+    gap: 1.5rem;
+
+    button {
+      width: 100%;
+    }
+  }
+}

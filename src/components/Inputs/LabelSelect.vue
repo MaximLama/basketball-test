@@ -67,4 +67,8 @@ const { label, options, error } = toRefs(props);
   background-color: $lightest-grey1;
   border: none;
 }
+
+:deep(.select) {
+  width: 0;
+}
 </style>

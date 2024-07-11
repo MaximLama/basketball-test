@@ -55,10 +55,10 @@ const setSelectOptions = (options: string[]) => {
 
 .container {
   display: flex;
-  padding: $container-padding;
+  padding: $container-p;
 
   @media (max-width: 1050px) {
-    padding: $container-padding-1050;
+    padding: $container-p-1050;
   }
 }
 

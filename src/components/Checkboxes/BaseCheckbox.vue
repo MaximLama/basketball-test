@@ -1,11 +1,11 @@
 <template>
   <div class="checkbox__wrapper">
     <div class="checkbox__inner">
-      <input type="checkbox" class="checkbox" :class="{ 'checkbox--error': error !== '' }" :id="id" :disabled="disabled"
-        :checked="checked" />
+      <input type="checkbox" class="checkbox" :class="{ 'checkbox--error': errorMessage }" :id="id" :disabled="disabled"
+        v-model="value" :name="name" @input="onChange" />
       <label :for="id" class="checkbox__label">{{ label }}</label>
     </div>
-    <span class="checkbox__error-msg" v-if="error !== ''">{{ error }}</span>
+    <span class="checkbox__error-msg" v-if="errorMessage">{{ errorMessage }}</span>
   </div>
 </template>
 
@@ -17,24 +17,31 @@ export default {
 interface ICheckboxProps {
   label: string;
   id: string;
+  name: string;
   disabled?: boolean;
-  error?: string;
-  checked?: boolean;
 }
 </script>
 
 <script lang="ts" setup>
+import { useField } from "vee-validate";
 import { withDefaults, toRefs } from "vue";
 
 const props = withDefaults(defineProps<ICheckboxProps>(), {
   label: "Label",
   id: "id",
   disabled: false,
-  error: "",
   checked: false,
 });
 
-const { label, id, disabled, error, checked } = toRefs(props);
+const { label, id, name, disabled } = toRefs(props);
+
+const { value, errorMessage, setErrors } = useField(name, undefined, {
+  validateOnValueUpdate: false
+});
+
+const onChange = () => {
+  setErrors([]);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -77,7 +84,7 @@ const { label, id, disabled, error, checked } = toRefs(props);
   &:checked+&__label::before {
     border: none;
     background-color: red;
-    background-image: url("@/assets/icons/img/checkbox.svg");
+    background-image: url("@/assets/img/icons/checkbox.svg");
   }
 
   &:not(:disabled):not(:checked)+&__label:hover::before {

@@ -84,6 +84,10 @@ const teammates: Ref<IPlayerProps[]> = ref(
 .container {
   flex-direction: column;
   gap: 2rem;
-  padding: 2rem 5rem;
+  padding: $container-p;
+
+  @media (max-width) {
+    padding: $container-p-1050;
+  }
 }
 </style>

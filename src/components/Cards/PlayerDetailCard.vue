@@ -15,7 +15,7 @@
       </div>
       <div class="card__info">
         <div class="info__item-header">
-          {{ player.name }} <span class="light-red">#{{ player.number }}</span>
+          <span>{{ player.name }} <span class="light-red">#{{ player.number }}</span></span>
         </div>
         <div class="info__item">
           <span class="info__item-title">Position</span>
@@ -103,6 +103,10 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
     color: $white;
     font-size: 1.125rem;
     line-height: 1.56rem;
+
+    @media (max-width: 1440px) {
+      flex-direction: column;
+    }
   }
 
   &__image {
@@ -115,16 +119,25 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
   &__info {
     flex-grow: 1;
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: $detail-card-template;
     margin: 4.0625rem 0;
+
+    @media (max-width: 1440px) {
+      grid-template-columns: $detail-card-template-1440;
+    }
   }
 }
 
 .image__wrapper {
-  width: 33.19rem;
-  height: 33.19rem;
+  max-width: $large-card-image-size;
+  max-height: $large-card-image-size;
   display: flex;
   align-items: end;
+
+  @media screen {
+    width: $large-card-image-size-1050;
+    height: $large-card-image-size-1050;
+  }
 
   img {
     object-fit: contain;
@@ -138,6 +151,10 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
   flex-direction: column;
   gap: 0.5rem;
 
+  @media (max-width: 1440px) {
+    align-items: center;
+  }
+
   &:not(:last-of-type) {
     margin-bottom: 3.37rem;
   }
@@ -149,11 +166,18 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
   }
 
   &-header {
+    display: flex;
     grid-area: 1 / 1 / 2 / span 2;
     font-weight: 700;
     font-size: 2.25rem;
     line-height: 3.07rem;
     margin-bottom: 2.5rem;
+
+    @media (max-width: 1440px) {
+      grid-area: auto;
+      justify-content: center;
+      text-align: center;
+    }
   }
 }
 </style>

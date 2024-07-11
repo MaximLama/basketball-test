@@ -1,9 +1,9 @@
 <template>
-  <form action="javascript:void(0)" class="signin">
+  <form @submit.prevent="onSubmit" class="signin">
     <h1 class="signin__title">Sign In</h1>
-    <BaseInput label="Login" type="text" />
-    <BaseInput label="Password" type="password" />
-    <BaseButton name="Sign in" />
+    <BaseInput label="Login" type="text" name="login" />
+    <BaseInput label="Password" type="password" name="password" />
+    <BaseButton name="Sign in" :disabled="isSubmitting" />
     <div class="signin__additionals">
       <span class="signin__additional-message">Not a member yet? </span>
       <BaseLink :href="RouteNamesEnum.signup">Sign up</BaseLink>
@@ -16,6 +16,10 @@ import BaseInput from "@/components/Inputs/BaseInput.vue";
 import BaseButton from "@/components/Buttons/BaseButton.vue";
 import BaseLink from "@/components/Links/BaseLink.vue";
 import { RouteNamesEnum } from "@/router/router.types";
+import useLogin from "@/composables/auth/login";
+
+const { isSubmitting, onSubmit } = useLogin();
+
 </script>
 
 <script lang="ts">

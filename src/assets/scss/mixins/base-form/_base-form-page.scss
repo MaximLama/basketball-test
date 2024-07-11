@@ -1,0 +1,29 @@
+@mixin base-form-page {
+  .container {
+    padding: $container-form-p;
+    flex-direction: column;
+
+    @media (max-width: 1050px) {
+      padding: $container-form-p-1050;
+    }
+  }
+
+  .block {
+    display: flex;
+    flex-direction: column;
+    background: $white;
+    border-radius: $add-form-br;
+
+    @media (max-width: 1050px) {
+      border-radius: $add-form-br-1050;
+    }
+  }
+
+  .breadcrumbs__wrapper {
+    padding: $breadcrumbs-p;
+
+    @media (max-width: 1050px) {
+      padding: $breadcrumbs-p-1050;
+    }
+  }
+}

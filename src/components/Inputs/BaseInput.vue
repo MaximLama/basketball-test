@@ -3,13 +3,13 @@
     <label class="input__label"> {{ label }}</label>
     <div class="input__inner">
       <input class="input" :class="{
-        'input--error': error !== '',
+        'input--error': errorMessage,
         'input--password': type === 'password',
-      }" :type="type" v-model="model" :disabled="disabled" />
+      }" :type="type" v-model="value" :name="name" :disabled="disabled" @input="onChange" />
       <span class="input__eye" v-if="type === 'password'"></span>
       <span class="input__date" v-if="type === 'date'"></span>
     </div>
-    <span class="input__error-msg">{{ error }}</span>
+    <span class="input__error-msg">{{ errorMessage }}</span>
   </div>
 </template>
 
@@ -21,24 +21,30 @@ export default {
 interface IInputProps {
   label: string;
   type: string;
+  name: string;
   disabled?: boolean;
-  error?: string;
 }
 </script>
 
 <script lang="ts" setup>
+import { useField } from "vee-validate";
 import { toRefs } from "vue";
 
 const props = withDefaults(defineProps<IInputProps>(), {
   label: "Label",
   type: "text",
   disabled: false,
-  error: "",
 });
 
-const { label, type, disabled, error } = toRefs(props);
+const { label, type, disabled, name } = toRefs(props);
 
-const model = defineModel<string>();
+const { value, errorMessage, setErrors } = useField(name, undefined, {
+  validateOnValueUpdate: false
+});
+
+const onChange = () => {
+  setErrors([]);
+}
 </script>
 
 <style lang="scss" scoped>

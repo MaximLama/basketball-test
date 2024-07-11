@@ -33,10 +33,15 @@ $logo-w-1050: 8.5625rem;
 $logo-h: 3rem;
 $logo-h-1050: 2.125rem;
 
+$nav-width: 8.75rem;
+
 $min-team-card-w: 22.75rem;
 
-$container-padding: 2rem 5rem;
-$container-padding-1050: 1rem 0.75rem;
+$container-p: 2rem 5rem;
+$container-p-1050: 1rem 0.75rem;
+
+$container-form-p: 2rem 5rem;
+$container-form-p-1050: 1rem 0;
 
 $max-input-w: 22.5rem;
 
@@ -68,6 +73,23 @@ $grid-row-gap: 2rem;
 $grid-row-gap-875: 0;
 $grid-mb-875: 1rem;
 
+$large-card-image-size: 33.19rem;
+$large-card-image-size-1050: 40vw;
+
+$add-form-w: 50%;
+$add-form-w-900: 100%;
+
+$add-form-br: 0.625rem;
+$add-form-br-1050: 0;
+
+$add-form-p: 3rem 0;
+$add-form-p-900: 3rem 1.5rem;
+
+$add-form-upload-mb-900: 3rem;
+
+$breadcrumbs-p: 1.5rem 2rem;
+$breadcrumbs-p-1050: 1rem;
+
 /*** BORDERS ***/
 $default-border: 0.5px solid $light-grey;
 
@@ -81,3 +103,6 @@ $grid-template-875: 'search_input search_input search_input' min-content
 
 $subgrid-columns: repeat(auto-fit, minmax($min-team-card-w, 1fr));
 $subgrid-columns-768: repeat(2, 1fr);
+
+$detail-card-template: repeat(2, auto);
+$detail-card-template-1440: 1fr;

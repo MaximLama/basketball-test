@@ -22,8 +22,9 @@ import PhotoIcon from '@/components/Icons/PhotoIcon.vue';
   position: relative;
   display: flex;
   max-width: 21rem;
-  height: 16.25rem;
-  flex-grow: 1;
+  width: 50vw;
+  max-height: 16.25rem;
+  height: 38.4vw;
   border-radius: 0.625rem;
   opacity: 50%;
   background-color: $light-grey;
@@ -38,8 +39,10 @@ import PhotoIcon from '@/components/Icons/PhotoIcon.vue';
   }
 
   &__icon {
-    width: 4.625rem;
-    height: 4.625rem;
+    max-width: 4.625rem;
+    width: 11vw;
+    max-height: 4.625rem;
+    height: 11vw;
     flex-shrink: 0;
   }
 }
