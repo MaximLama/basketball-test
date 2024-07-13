@@ -9,7 +9,7 @@
       <span class="input__eye" v-if="type === 'password'"></span>
       <span class="input__date" v-if="type === 'date'"></span>
     </div>
-    <span class="input__error-msg">{{ errorMessage }}</span>
+    <span class="error-msg">{{ errorMessage }}</span>
   </div>
 </template>
 
@@ -123,13 +123,6 @@ const onChange = () => {
 
   &__label {
     margin-bottom: 0.5rem;
-  }
-
-  &__error-msg {
-    font-size: 0.75rem;
-    line-height: 1.125rem;
-    color: $lightest-red;
-    margin-top: 2px;
   }
 }
 </style>

@@ -1,9 +1,21 @@
 <template>
-  <BaseButton name='Add +' class="add-btn" />
+  <BaseButton name='Add +' class="add-btn" @click.prevent="next" />
 </template>
 
 <script lang="ts" setup>
 import BaseButton from "@/components/Buttons/BaseButton.vue";
+import { useRouter, type RouteLocationAsRelativeGeneric } from "vue-router";
+
+const props = defineProps<{
+  to?: RouteLocationAsRelativeGeneric
+}>();
+
+const router = useRouter();
+
+const next = () => {
+  if (props.to)
+    router.push(props.to);
+}
 </script>
 
 <script lang="ts">

@@ -4,7 +4,10 @@ declare module 'vue-router' {
   interface RouteMeta {
     requiresAuth?: boolean
 
-    //show position select 
+    //show position select
     showSelect?: boolean
+
+    //link for "add" button
+    addButtonTo?: RouteLocationAsRelativeGeneric
   }
 }

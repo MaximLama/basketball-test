@@ -42,7 +42,10 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: RouteNamesEnum.teams,
                 component: () => import('@/pages/Teams.vue'),
                 meta: {
-                  requiresAuth: true
+                  requiresAuth: true,
+                  addButtonTo: {
+                    name: RouteNamesEnum.addTeam
+                  }
                 }
               }
             ]

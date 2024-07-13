@@ -5,7 +5,7 @@
         v-model="value" :name="name" @input="onChange" />
       <label :for="id" class="checkbox__label">{{ label }}</label>
     </div>
-    <span class="checkbox__error-msg" v-if="errorMessage">{{ errorMessage }}</span>
+    <span class="error-msg" v-if="errorMessage">{{ errorMessage }}</span>
   </div>
 </template>
 
@@ -105,13 +105,6 @@ const onChange = () => {
     &::before {
       background-color: $lightest-grey;
     }
-  }
-
-  &__error-msg {
-    font-size: 0.75rem;
-    line-height: 1.125rem;
-    color: $lightest-red;
-    margin-top: 2px;
   }
 
   &__wrapper {

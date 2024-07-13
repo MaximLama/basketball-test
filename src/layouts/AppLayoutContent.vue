@@ -8,7 +8,7 @@
         <BaseSelect :options="selectOptions" :multiple="true" />
       </div>
       <div class="add-btn__wrapper">
-        <AddButton />
+        <AddButton :to="addButtonTo" />
       </div>
       <div class="subgrid">
         <router-view v-slot="{ Component }">
@@ -34,7 +34,7 @@ import BasePagination from '@/components/Blocks/BasePagination.vue';
 import PaginationSelect from '@/components/Inputs/PaginationSelect.vue';
 import BaseSelect from '@/components/Inputs/BaseSelect.vue';
 import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, type RouteLocationAsRelativeGeneric } from 'vue-router';
 
 const route = useRoute();
 
@@ -48,6 +48,10 @@ const isSelectActive = computed<boolean>(() => {
 const setSelectOptions = (options: string[]) => {
   selectOptions.value = options;
 }
+
+const addButtonTo = computed(() => {
+  return route.meta.addButtonTo as RouteLocationAsRelativeGeneric;
+})
 </script>
 
 <style lang="scss" scoped>

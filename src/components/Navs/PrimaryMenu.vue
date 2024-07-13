@@ -24,6 +24,7 @@ import type IPrimaryMenuItemProps from "@/interfaces/IPrimaryMenuItemProps";
 import TeamsIcon from "@/components/Icons/TeamsIcon.vue";
 import PlayersIcon from "@/components/Icons/PlayersIcon.vue";
 import { ref } from "vue";
+import useOnResizeWindow from "@/composables/helpers/onResizeWindow";
 
 const navLinks: IPrimaryMenuItemProps[] = [
   {
@@ -53,6 +54,12 @@ const hideMainMenu = () => {
   const body = document.getElementsByTagName('body').item(0);
   body?.classList.remove('no-scroll');
 }
+
+useOnResizeWindow((e: Event) => {
+  if (isMobileMenuShown.value && window.innerWidth > 1050) {
+    hideMainMenu();
+  }
+});
 
 </script>
 
@@ -88,7 +95,7 @@ export default {
     @media (max-width: 1050px) {
       display: flex;
       z-index: 2;
-      height: calc(100vh - $header-h);
+      height: calc(100vh - $header-h-1050);
     }
   }
 }

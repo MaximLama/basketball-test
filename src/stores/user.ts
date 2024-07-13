@@ -1,9 +1,9 @@
-import type RegisterRequest from '@/api/dto/requests/RegisterRequest'
+import type RegisterRequest from '@/api/dto/auth/RegisterRequest'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { register as registerRequest } from '@/api/auth/register'
 import { login as loginRequest } from '@/api/auth/login'
-import type LoginRequest from '@/api/dto/requests/LoginRequest'
+import type LoginRequest from '@/api/dto/auth/LoginRequest'
 
 interface User {
   name: string
@@ -13,10 +13,13 @@ interface User {
 
 export const useUserStore = defineStore('user', () => {
   const token = localStorage.getItem('token')
+  const name = localStorage.getItem('name')
+  const avatarUrl = localStorage.getItem('avatarUrl')
+
   const user = ref<User>({
-    name: localStorage.getItem('name') || '',
-    avatarUrl: localStorage.getItem('avatarUrl') || '',
-    isAuthorized: token !== null && token.length > 0
+    name: name ? JSON.parse(name) : '',
+    avatarUrl: avatarUrl ? JSON.parse(avatarUrl) : '',
+    isAuthorized: token !== null && JSON.parse(token).length > 0
   })
 
   function setUser(name: string, avatarUrl: string) {
