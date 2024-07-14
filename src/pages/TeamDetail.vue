@@ -81,6 +81,8 @@ const teammates: Ref<IPlayerProps[]> = ref(
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/variables";
+
 .container {
   flex-direction: column;
   gap: 2rem;

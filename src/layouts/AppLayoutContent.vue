@@ -2,7 +2,7 @@
   <div class="container">
     <div class="card-grid">
       <div class="search">
-        <SearchInput />
+        <SearchInput :value="searchName" @change="setSearchName" />
       </div>
       <div class="select__wrapper" v-if="isSelectActive">
         <BaseSelect :options="selectOptions" :multiple="true" />
@@ -12,10 +12,11 @@
       </div>
       <div class="subgrid">
         <router-view v-slot="{ Component }">
-          <component :is="Component" :setSelectOptions="setSelectOptions"></component>
+          <component :is="Component" :params="{ pageSize, page: currentPage, name: searchName }">
+          </component>
         </router-view>
       </div>
-      <BasePagination :total="27" />
+      <BasePagination :total="pageCount" :currentPage="currentPage" />
       <PaginationSelect :options="paginationOptions" />
     </div>
   </div>
@@ -33,22 +34,19 @@ import AddButton from '@/components/Buttons/AddButton.vue';
 import BasePagination from '@/components/Blocks/BasePagination.vue';
 import PaginationSelect from '@/components/Inputs/PaginationSelect.vue';
 import BaseSelect from '@/components/Inputs/BaseSelect.vue';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useRoute, type RouteLocationAsRelativeGeneric } from 'vue-router';
+import usePagination from '@/composables/pagination/pagination';
+import useSearch from '@/composables/search/search';
+import useTeamsSelect from '@/composables/players/teamsSelect';
+
+const { paginationOptions, pageSize, currentPage, pageCount } = usePagination();
+
+const { searchName, setSearchName } = useSearch();
+
+const { isSelectActive, selectOptions } = useTeamsSelect();
 
 const route = useRoute();
-
-const paginationOptions = ref([6, 12, 24]);
-const selectOptions = ref<string[]>([]);
-
-const isSelectActive = computed<boolean>(() => {
-  return route.meta.showSelect === true;
-})
-
-const setSelectOptions = (options: string[]) => {
-  selectOptions.value = options;
-}
-
 const addButtonTo = computed(() => {
   return route.meta.addButtonTo as RouteLocationAsRelativeGeneric;
 })

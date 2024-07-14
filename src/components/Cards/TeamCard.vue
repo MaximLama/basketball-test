@@ -1,26 +1,22 @@
 <template>
-  <div class="card">
+  <router-link :to="{ name: RouteNamesEnum.team, params: { id } }" class="card">
     <div class="card__top">
-      <img :src="image" class="card__image" />
+      <img v-if="imageUrl" :src="imageUrl" class="card__image" />
     </div>
     <div class="card__bottom">
       <div class="card__text-box">
         <span class="card__title">{{ name }}</span>
-        <span class="card__subtitle">Year of foundation: {{ year }}</span>
+        <span class="card__subtitle">Year of foundation: {{ year || '-' }}</span>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script lang="ts" setup>
-import type ITeamCardProps from "@/interfaces/ITeamCardProps";
-import { toRefs } from "vue";
+import useTeamCard from "@/composables/teams/teamCard";
+import { RouteNamesEnum } from "@/router/router.types";
 
-const props = defineProps<{
-  team: ITeamCardProps;
-}>();
-
-const { name, year, image } = toRefs(props.team);
+const { id, name, year, imageUrl } = useTeamCard();
 </script>
 
 <script lang="ts">
@@ -36,6 +32,7 @@ export default {
   display: flex;
   min-width: $min-team-card-w;
   flex-direction: column;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     min-width: 0;

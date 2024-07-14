@@ -22,21 +22,9 @@ export default {
 
 <script lang="ts" setup>
 import SelectArrow from '@/components/Icons/SelectArrow.vue';
-import { toRef, ref } from 'vue';
+import usePaginationSelect from '@/composables/pagination/paginationSelect';
 
-const props = defineProps<{
-  options?: number[]
-}>();
-
-const options = toRef(() => props.options);
-const selected = ref(options.value?.length ? options.value[0] : '');
-
-const select = (value: number) => {
-  selected.value = value;
-  active.value = false;
-}
-
-const active = ref(false);
+const { select, active, selected, options } = usePaginationSelect();
 
 </script>
 
@@ -119,6 +107,7 @@ const active = ref(false);
   border: 0.5px solid $lightest-grey;
   color: $light-grey;
   padding: 6px;
+  background-color: $white;
   cursor: pointer;
 
   @media (max-width: 768px) {

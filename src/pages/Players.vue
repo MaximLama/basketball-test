@@ -13,7 +13,8 @@ export default {
 import PlayerCard from "@/components/Cards/PlayerCard.vue";
 import type IPlayerCardProps from "@/interfaces/IPlayerCardProps";
 import JaylenAdamsImg from "@/assets/img/players/jaylenadams.png";
-import { onMounted, ref } from "vue";
+import { inject, onMounted, ref } from "vue";
+import type TeamsSelect from "@/interfaces/TeamsSelect";
 
 const players = ref<IPlayerCardProps[]>([
   {
@@ -42,9 +43,7 @@ const players = ref<IPlayerCardProps[]>([
   },
 ]);
 
-const props = defineProps<{
-  setSelectOptions: (options: string[]) => void
-}>();
+const { setSelectOptions } = inject("teamsSelect") as TeamsSelect;
 
 const selectOptions = [
   "Forward",
@@ -57,5 +56,5 @@ const selectOptions = [
   "EEEEEEEEE"
 ];
 
-onMounted(() => props.setSelectOptions(selectOptions))
+onMounted(() => setSelectOptions(selectOptions))
 </script>

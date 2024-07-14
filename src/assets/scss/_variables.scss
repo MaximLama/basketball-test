@@ -101,7 +101,7 @@ $grid-template-875: 'search_input search_input search_input' min-content
   'subgrid      subgrid      subgrid' min-content 'pagination   pagination   pagination_select'
   min-content / 1fr 1fr 1fr;
 
-$subgrid-columns: repeat(auto-fit, minmax($min-team-card-w, 1fr));
+$subgrid-columns: repeat(auto-fill, minmax($min-team-card-w, 1fr));
 $subgrid-columns-768: repeat(2, 1fr);
 
 $detail-card-template: repeat(2, auto);

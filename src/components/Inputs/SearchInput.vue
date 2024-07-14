@@ -1,6 +1,6 @@
 <template>
   <div class="search__wrapper">
-    <input type="text" class="search" placeholder="Search..." />
+    <input type="text" :value="value" @change="onChange" class="search" placeholder="Search..." />
     <span class="search__button"></span>
   </div>
 </template>
@@ -9,6 +9,12 @@
 export default {
   name: "SearchInput",
 };
+</script>
+
+<script lang="ts" setup>
+import useSearchInput from '@/composables/search/searchInput';
+
+const { value, onChange } = useSearchInput();
 </script>
 
 <style lang="scss" scoped>

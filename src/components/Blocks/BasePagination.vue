@@ -35,10 +35,6 @@
 </template>
 
 <script lang="ts">
-interface BasePaginationProps {
-  total: number;
-}
-
 export default {
   name: "BasePagination",
 };
@@ -48,62 +44,10 @@ export default {
 import BasePaginationLink from "@/components/Links/BasePaginationLink.vue";
 import PaginationLeftArrow from "@/components/Icons/PaginationLeftArrow.vue";
 import PaginationRightArrow from "@/components/Icons/PaginationRightArrow.vue";
-import router from "@/router";
-import { computed, toRef } from "vue";
-import { useRoute } from "vue-router";
+import useBasePagination from "@/composables/pagination/basePagination";
 
-const props = defineProps<BasePaginationProps>();
+const { premiddle, middle, postmiddle, total, prev, next } = useBasePagination();
 
-const total = toRef(() => props.total);
-
-const route = useRoute();
-const current = computed(() => {
-  return route.query.page
-    ? parseInt(route.query.page as unknown as string)
-    : 1;
-});
-
-const premiddle = computed(() => {
-  if (current.value <= 3) {
-    return 2;
-  } else if (current.value >= total.value - 2) {
-    return total.value - 3;
-  } else {
-    return current.value - 1;
-  }
-});
-
-const middle = computed(() => {
-  if (current.value <= 3) {
-    return 3;
-  } else if (current.value >= total.value - 2) {
-    return total.value - 2;
-  } else {
-    return current.value;
-  }
-});
-
-const postmiddle = computed(() => {
-  if (current.value <= 3) {
-    return 4;
-  } else if (current.value >= total.value - 2) {
-    return total.value - 1;
-  } else {
-    return current.value + 1;
-  }
-});
-
-const prev = () => {
-  if (current.value > 1) {
-    router.push({ query: { page: current.value - 1 } })
-  }
-}
-
-const next = () => {
-  if (current.value < total.value) {
-    router.push({ query: { page: current.value + 1 } })
-  }
-}
 </script>
 
 <style lang="scss" scoped>
