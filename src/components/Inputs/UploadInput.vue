@@ -3,11 +3,11 @@
     <label class="upload">
       <input type="file" class="upload__input" @change="onFileChange">
       <div class="upload__image-wrapper">
-        <img class="upload__image" :src="fileUrl" alt="">
+        <img class="upload__image" :src="imageUrl ? baseUrl + imageUrl : imageUrl" alt="">
       </div>
       <PhotoIcon class="upload__icon" />
     </label>
-    <div class="error-msg" v-if="error">{{ error }}</div>
+    <div class="error-msg" v-if="errorMessage">{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -19,32 +19,18 @@ export default {
 
 <script lang="ts" setup>
 import PhotoIcon from '@/components/Icons/PhotoIcon.vue';
-import { computed, ref, toRef } from 'vue';
+import useUploadInput from '@/composables/inputs/uploadInput';
+import { baseUrl } from '@/constants/constants';
 
 const props = defineProps<{
-  error?: string
-}>();
-
-const error = toRef(() => props.error);
-
-const file = ref<File | null>(null);
-const fileUrl = computed(() => {
-  return file.value ? URL.createObjectURL(file.value) : undefined;
-});
+  name: string
+}>()
 
 const emit = defineEmits<{
   change: [file: File | null]
 }>()
 
-const onFileChange = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  if (target.files && target.files.length > 0 && target.files[0].type.startsWith('image')) {
-    file.value = target.files[0];
-  } else {
-    file.value = null;
-  }
-  emit("change", file.value);
-};
+const { imageUrl, errorMessage, onFileChange } = useUploadInput(props, emit)
 
 </script>
 

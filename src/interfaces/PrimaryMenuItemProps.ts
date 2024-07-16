@@ -3,7 +3,7 @@ import type { RouteLocationAsRelativeGeneric } from 'vue-router'
 
 type IconComponent = DefineComponent<{}, {}, any>
 
-export default interface IPrimaryMenuItemProps {
+export default interface PrimaryMenuItemProps {
   svg: IconComponent
   href: RouteLocationAsRelativeGeneric
   baseRoute: RouteLocationAsRelativeGeneric

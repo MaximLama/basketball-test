@@ -24,7 +24,11 @@ export default {
 import SelectArrow from '@/components/Icons/SelectArrow.vue';
 import usePaginationSelect from '@/composables/pagination/paginationSelect';
 
-const { select, active, selected, options } = usePaginationSelect();
+const props = defineProps<{
+  options?: number[]
+}>()
+
+const { select, active, selected, options } = usePaginationSelect(props);
 
 </script>
 
@@ -35,6 +39,10 @@ const { select, active, selected, options } = usePaginationSelect();
   grid-area: pagination_select;
   justify-self: end;
   position: relative;
+
+  @media (max-width: 1050px) {
+    margin: $grid-items-m-1050;
+  }
 }
 
 .selected {

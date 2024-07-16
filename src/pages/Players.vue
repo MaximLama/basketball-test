@@ -1,5 +1,7 @@
 <template>
-  <PlayerCard v-for="(player, index) in players" :key="index" :player="player" />
+  <div class="subgrid">
+    <PlayerCard v-for="(player, index) in players" :key="index" :player="player" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -58,3 +60,17 @@ const selectOptions = [
 
 onMounted(() => setSelectOptions(selectOptions))
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/variables";
+
+.subgrid {
+  display: grid;
+  grid-area: subgrid;
+  grid-template-columns: $subgrid-columns;
+  grid-gap: 1.25vw;
+
+  @media (max-width: 768px) {
+    grid-template-columns: $subgrid-columns-768;
+  }
+}

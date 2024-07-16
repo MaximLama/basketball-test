@@ -4,18 +4,14 @@
 
 <script lang="ts" setup>
 import BaseButton from "@/components/Buttons/BaseButton.vue";
-import { useRouter, type RouteLocationAsRelativeGeneric } from "vue-router";
+import useAddButton from "@/composables/buttons/addButton";
+import { type RouteLocationAsRelativeGeneric } from "vue-router";
 
 const props = defineProps<{
   to?: RouteLocationAsRelativeGeneric
 }>();
 
-const router = useRouter();
-
-const next = () => {
-  if (props.to)
-    router.push(props.to);
-}
+const next = useAddButton(props);
 </script>
 
 <script lang="ts">

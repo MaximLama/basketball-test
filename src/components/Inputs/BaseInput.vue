@@ -17,34 +17,20 @@
 export default {
   name: "BaseInput",
 };
-
-interface IInputProps {
-  label: string;
-  type: string;
-  name: string;
-  disabled?: boolean;
-}
 </script>
 
 <script lang="ts" setup>
-import { useField } from "vee-validate";
-import { toRefs } from "vue";
+import useBaseInput from "@/composables/inputs/baseInput";
+import type InputProps from "@/interfaces/InputProps";
 
-const props = withDefaults(defineProps<IInputProps>(), {
+const props = withDefaults(defineProps<InputProps>(), {
   label: "Label",
   type: "text",
   disabled: false,
 });
 
-const { label, type, disabled, name } = toRefs(props);
+const { label, type, disabled, name, value, errorMessage, onChange } = useBaseInput(props);
 
-const { value, errorMessage, setErrors } = useField(name, undefined, {
-  validateOnValueUpdate: false
-});
-
-const onChange = () => {
-  setErrors([]);
-}
 </script>
 
 <style lang="scss" scoped>

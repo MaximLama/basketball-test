@@ -14,7 +14,15 @@ export default {
 <script lang="ts" setup>
 import useSearchInput from '@/composables/search/searchInput';
 
-const { value, onChange } = useSearchInput();
+const props = defineProps<{
+  value: string
+}>()
+
+const emit = defineEmits<{
+  change: [value: string]
+}>()
+
+const { value, onChange } = useSearchInput(props, emit);
 </script>
 
 <style lang="scss" scoped>

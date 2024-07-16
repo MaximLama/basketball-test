@@ -45,8 +45,11 @@ import BasePaginationLink from "@/components/Links/BasePaginationLink.vue";
 import PaginationLeftArrow from "@/components/Icons/PaginationLeftArrow.vue";
 import PaginationRightArrow from "@/components/Icons/PaginationRightArrow.vue";
 import useBasePagination from "@/composables/pagination/basePagination";
+import type BasePaginationProps from "@/interfaces/BasePaginationProps";
 
-const { premiddle, middle, postmiddle, total, prev, next } = useBasePagination();
+const props = defineProps<BasePaginationProps>()
+
+const { premiddle, middle, postmiddle, total, prev, next } = useBasePagination(props);
 
 </script>
 
@@ -57,6 +60,10 @@ const { premiddle, middle, postmiddle, total, prev, next } = useBasePagination()
   display: flex;
   gap: $pagination-gap;
   grid-area: pagination;
+
+  @media (max-width: 1050px) {
+    margin: $grid-items-m-1050;
+  }
 
   @media (max-width: 768px) {
     gap: $pagination-gap-768;

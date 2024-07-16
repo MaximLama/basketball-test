@@ -1,11 +1,7 @@
 import type Pagination from '@/interfaces/Pagination'
 import { inject, ref, toRef } from 'vue'
 
-export default function usePaginationSelect() {
-  const props = defineProps<{
-    options?: number[]
-  }>()
-
+export default function usePaginationSelect(props: { options?: number[] }) {
   const { setPageSize } = inject('pagination') as Pagination
 
   const options = toRef(() => props.options)

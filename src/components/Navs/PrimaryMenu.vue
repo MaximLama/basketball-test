@@ -19,47 +19,9 @@
 <script lang="ts" setup>
 import PrimaryMenuItem from "@/components/Navs/PrimaryMenuItem.vue";
 import SignOut from "@/components/Navs/SignOut.vue";
-import { RouteNamesEnum } from "@/router/router.types";
-import type IPrimaryMenuItemProps from "@/interfaces/IPrimaryMenuItemProps";
-import TeamsIcon from "@/components/Icons/TeamsIcon.vue";
-import PlayersIcon from "@/components/Icons/PlayersIcon.vue";
-import { ref } from "vue";
-import useOnResizeWindow from "@/composables/helpers/onResizeWindow";
+import usePrimaryMenu from "@/composables/menu/primaryMenu";
 
-const navLinks: IPrimaryMenuItemProps[] = [
-  {
-    svg: TeamsIcon,
-    href: { name: RouteNamesEnum.teams },
-    baseRoute: { name: RouteNamesEnum.teamsBase },
-    name: "Teams",
-  },
-  {
-    svg: PlayersIcon,
-    href: { name: RouteNamesEnum.players },
-    baseRoute: { name: RouteNamesEnum.playersBase },
-    name: "Players",
-  },
-];
-
-const isMobileMenuShown = ref(false);
-
-const toggleMainMenu = () => {
-  isMobileMenuShown.value = !isMobileMenuShown.value;
-  const body = document.getElementsByTagName('body').item(0);
-  isMobileMenuShown.value ? body?.classList.add('no-scroll') : body?.classList.remove('no-scroll');
-};
-
-const hideMainMenu = () => {
-  isMobileMenuShown.value = false;
-  const body = document.getElementsByTagName('body').item(0);
-  body?.classList.remove('no-scroll');
-}
-
-useOnResizeWindow((e: Event) => {
-  if (isMobileMenuShown.value && window.innerWidth > 1050) {
-    hideMainMenu();
-  }
-});
+const { navLinks, isMobileMenuShown, toggleMainMenu, hideMainMenu } = usePrimaryMenu();
 
 </script>
 

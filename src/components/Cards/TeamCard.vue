@@ -1,7 +1,7 @@
 <template>
   <router-link :to="{ name: RouteNamesEnum.team, params: { id } }" class="card">
     <div class="card__top">
-      <img v-if="imageUrl" :src="imageUrl" class="card__image" />
+      <img v-if="imageUrl" :src="imageUrl ? baseUrl + imageUrl : imageUrl" class="card__image" />
     </div>
     <div class="card__bottom">
       <div class="card__text-box">
@@ -13,10 +13,16 @@
 </template>
 
 <script lang="ts" setup>
-import useTeamCard from "@/composables/teams/teamCard";
+import type Team from "@/api/dto/teams/Team";
 import { RouteNamesEnum } from "@/router/router.types";
+import { toRefs } from "vue";
+import { baseUrl } from "@/constants/constants";
 
-const { id, name, year, imageUrl } = useTeamCard();
+const props = defineProps<{
+  team: Team
+}>()
+
+const { id, name, foundationYear: year, imageUrl } = toRefs(props.team)
 </script>
 
 <script lang="ts">

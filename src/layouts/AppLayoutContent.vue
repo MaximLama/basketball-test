@@ -10,12 +10,10 @@
       <div class="add-btn__wrapper">
         <AddButton :to="addButtonTo" />
       </div>
-      <div class="subgrid">
-        <router-view v-slot="{ Component }">
-          <component :is="Component" :params="{ pageSize, page: currentPage, name: searchName }">
-          </component>
-        </router-view>
-      </div>
+      <router-view v-slot="{ Component }">
+        <component :is="Component" :params="{ pageSize, page: currentPage, name: searchName }">
+        </component>
+      </router-view>
       <BasePagination :total="pageCount" :currentPage="currentPage" />
       <PaginationSelect :options="paginationOptions" />
     </div>
@@ -77,17 +75,6 @@ const addButtonTo = computed(() => {
   }
 }
 
-.subgrid {
-  display: grid;
-  grid-area: subgrid;
-  grid-template-columns: $subgrid-columns;
-  grid-gap: 1.25vw;
-
-  @media (max-width: 768px) {
-    grid-template-columns: $subgrid-columns-768;
-  }
-}
-
 .search {
   display: flex;
   grid-area: search_input;
@@ -112,12 +99,20 @@ const addButtonTo = computed(() => {
   }
 }
 
+@media (max-width: 1050px) {
+
+  .search,
+  .select__wrapper,
+  .add-btn__wrapper {
+    margin: $grid-items-m-1050;
+  }
+}
+
 @media (max-width: 875px) {
 
   .search,
   .select__wrapper,
-  .add-btn__wrapper,
-  .subgrid {
+  .add-btn__wrapper {
     margin-bottom: $grid-mb-875;
   }
 }

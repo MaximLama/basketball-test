@@ -65,6 +65,14 @@ const routes: Readonly<RouteRecordRaw[]> = [
             meta: {
               requiresAuth: true
             }
+          },
+          {
+            path: ':id(\\d+)/edit',
+            name: RouteNamesEnum.editTeam,
+            component: () => import('@/pages/EditTeam.vue'),
+            meta: {
+              requiresAuth: true
+            }
           }
         ]
       },

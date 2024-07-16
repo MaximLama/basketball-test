@@ -8,30 +8,14 @@
 export default {
   name: "BasePaginationLink",
 };
-
-interface BasePaginationLinkProps {
-  href: RouteLocationRaw;
-  page: number;
-}
 </script>
 
 <script lang="ts" setup>
-import { computed, toRefs } from "vue";
-import { useRoute } from "vue-router";
-import type { RouteLocationRaw } from "vue-router";
+import useBasePaginationLink from "@/composables/pagination/basePaginationLink";
+import type BasePaginationLinkProps from "@/interfaces/BasePaginationLinkProps";
 
 const props = defineProps<BasePaginationLinkProps>();
-const route = useRoute();
-const { href, page } = toRefs(props);
-
-const routePage = computed(() => {
-  return (route.query.page === null || route.query.page === undefined
-    ? 1
-    : route.query.page) as unknown as number;
-});
-const isActive = computed(() => {
-  return routePage.value == page.value;
-});
+const { href, isActive } = useBasePaginationLink(props);
 </script>
 
 <style lang="scss" scoped>

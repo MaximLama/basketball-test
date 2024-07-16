@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <TeamDetailCard v-bind="team" />
+    <TeamDetailCard v-if="team" :team="team" />
     <TeamComposition :teammates="teammates" />
   </div>
 </template>
@@ -14,20 +14,20 @@ export default {
 <script lang="ts" setup>
 import TeamDetailCard from "@/components/Cards/TeamDetailCard.vue";
 import TeamComposition from "@/components/Blocks/TeamComposition.vue";
-import { reactive, ref } from "vue";
-import type { Ref } from "vue";
-import type ITeamDetailProps from '@/interfaces/ITeamDetailProps';
-import DenverImg from "@/assets/img/teams/DEN.png";
+import { onMounted, ref, type Ref } from "vue";
 import BolBolImg from "@/assets/img/players/bol-bol.png";
 import type IPlayerProps from "@/interfaces/IPlayerProps";
+import { getTeam as getTeamRequest } from "@/api/teams/getTeam";
+import { useRoute } from "vue-router";
+import type Team from "@/api/dto/teams/Team";
 
-const team: ITeamDetailProps = reactive({
+/*const team: ITeamDetailProps = reactive({
   name: "Denver Nuggets",
   img: DenverImg,
   year: 1976,
   division: "Northwestern",
   conference: "Western"
-});
+});*/
 
 const teammates: Ref<IPlayerProps[]> = ref(
   [
@@ -78,6 +78,19 @@ const teammates: Ref<IPlayerProps[]> = ref(
     }
   ]
 );
+
+const route = useRoute();
+
+const team = ref<Team | null>();
+
+const getTeam = async () => {
+  const id = parseInt(route.params.id as string);
+  team.value = await getTeamRequest(id);
+}
+
+onMounted(async () => {
+  await getTeam()
+})
 </script>
 
 <style lang="scss" scoped>

@@ -5,12 +5,9 @@ import { inject, onMounted, ref, toRef, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { getTeams as getTeamsRequest } from '@/api/teams/getTeams'
 
-export default function useTeams() {
+export default function useTeams(props: { params: GetTeamsRequest }) {
   const teams = ref<Team[]>([])
-
-  const props = defineProps<{
-    params: GetTeamsRequest
-  }>()
+  const isEmpty = ref(false)
 
   const params = toRef(() => props.params)
 
@@ -27,6 +24,7 @@ export default function useTeams() {
     teams.value = teamsInfo.data
     const pageCount = Math.ceil(teamsInfo.count / params.value.pageSize)
     setPageCount(pageCount)
+    isEmpty.value = teamsInfo.count === 0
 
     if (pageCount < teamsInfo.page && teamsInfo.page > 1) {
       router.push({
@@ -41,5 +39,5 @@ export default function useTeams() {
     deep: true
   })
 
-  return teams
+  return { teams, isEmpty }
 }

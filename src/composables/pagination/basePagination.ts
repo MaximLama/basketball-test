@@ -1,14 +1,8 @@
+import type BasePaginationProps from '@/interfaces/BasePaginationProps'
 import { computed, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 
-interface BasePaginationProps {
-  total: number
-  currentPage: number
-}
-
-export default function useBasePagination() {
-  const props = defineProps<BasePaginationProps>()
-
+export default function useBasePagination(props: BasePaginationProps) {
   const { total, currentPage: current } = toRefs(props)
 
   const router = useRouter()

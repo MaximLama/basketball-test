@@ -38,7 +38,9 @@ $nav-width: 8.75rem;
 $min-team-card-w: 22.75rem;
 
 $container-p: 2rem 5rem;
-$container-p-1050: 1rem 0.75rem;
+$container-p-1050: 1rem 0;
+
+$grid-items-m-1050: 0 0.75rem;
 
 $container-form-p: 2rem 5rem;
 $container-form-p-1050: 1rem 0;
@@ -90,16 +92,40 @@ $add-form-upload-mb-900: 3rem;
 $breadcrumbs-p: 1.5rem 2rem;
 $breadcrumbs-p-1050: 1rem;
 
+$empty-w: 34.75rem;
+$empty-w-875: 100%;
+
+$empty-br: 0.9375rem;
+$empty-br-875: 0;
+
+$empty-p: 3rem 2.3125rem;
+$empty-p-875: 3rem 1.125rem;
+
+$empty-title-mb: 1.5rem;
+$empty-title-mb-875: 1rem;
+
+$empty-title-fs: 2.25rem;
+$empty-title-fs-875: 1.0625rem;
+
+$empty-title-lh: 3.07rem;
+$empty-title-lh-875: 1.5625rem;
+
+$empty-subtitle-fs: 1.5rem;
+$empty-subtitle-fs-875: 0.9375rem;
+
+$empty-subtitle-lh: 2.05rem;
+$empty-subtitle-lh-875: 1.5rem;
+
 /*** BORDERS ***/
 $default-border: 0.5px solid $light-grey;
 
 /*** GRID ***/
 $grid-template: 'search_input select      add_button' min-content 'subgrid      subgrid     subgrid'
-  min-content 'pagination   pagination  pagination_select' min-content / max-content max-content 1fr;
+  1fr 'pagination   pagination  pagination_select' min-content / max-content max-content 1fr;
 $grid-template-875: 'search_input search_input search_input' min-content
   'select       select       select' min-content 'add_button   add_button   add_button' min-content
-  'subgrid      subgrid      subgrid' min-content 'pagination   pagination   pagination_select'
-  min-content / 1fr 1fr 1fr;
+  'subgrid      subgrid      subgrid' 1fr 'pagination   pagination   pagination_select' min-content /
+  1fr 1fr 1fr;
 
 $subgrid-columns: repeat(auto-fill, minmax($min-team-card-w, 1fr));
 $subgrid-columns-768: repeat(2, 1fr);

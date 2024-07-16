@@ -26,61 +26,34 @@ export default {
   name: "BaseSelect"
 }
 
-interface BaseSelectProps {
-  options: string[];
-  multiple?: boolean;
-  selectClass?: string;
-}
+
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, toRefs, type Ref } from 'vue';
 import SelectArrow from '@/components/Icons/SelectArrow.vue';
 import ClearIcon from '@/components/Icons/ClearIcon.vue';
 import SelectTags from '@/components/Blocks/SelectTags.vue';
+import type BaseSelectProps from '@/interfaces/BaseSelectProps';
+import useBaseSelect from '@/composables/inputs/baseSelect';
 
 const props = withDefaults(defineProps<BaseSelectProps>(), {
   multiple: false,
   selectClass: '',
 });
 
-const { options, multiple, selectClass } = toRefs(props);
-
-const placeholder = ref("Select..");
-
-/* if multiple == false */
-const selected = ref("");
-/* endif */
-
-/* if multiple == true */
-const tags: Ref<Set<string>> = ref(new Set());
-/* endif */
-
-const select = computed<(value: string) => void>(() => {
-  return multiple.value
-    ? (value: string) => tags.value.has(value) ? tags.value.delete(value) : tags.value.add(value)
-    : (value: string) => {
-      selected.value = value;
-      active.value = false;
-    }
-});
-
-const clear = computed<() => void>(() => {
-  return multiple.value
-    ? () => tags.value = new Set()
-    : () => selected.value = "";
-});
-
-const removeTag = (tag: string) => tags.value.delete(tag);
-
-/* active flags */
-const active = ref(false);
-const activePlaceholder = computed<boolean>(() => {
-  return multiple.value ? tags.value.size == 0 : selected.value.length == 0;
-});
-const activeClear = computed<boolean>(() => {
-  return multiple.value ? tags.value.size > 0 : selected.value.length > 0;
-})
+const {
+  options,
+  selectClass,
+  placeholder,
+  select,
+  clear,
+  removeTag,
+  active,
+  activePlaceholder,
+  activeClear,
+  selected,
+  tags
+} = useBaseSelect(props);
 
 </script>
 

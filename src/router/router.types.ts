@@ -11,5 +11,6 @@ export enum RouteNamesEnum {
   player = 'player',
   addTeam = 'addTeam',
   addPlayer = 'addPlayer',
+  editTeam = 'editTeam',
   error404 = 'error404'
 }

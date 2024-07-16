@@ -13,35 +13,21 @@
 export default {
   name: "BaseCheckbox",
 };
-
-interface ICheckboxProps {
-  label: string;
-  id: string;
-  name: string;
-  disabled?: boolean;
-}
 </script>
 
 <script lang="ts" setup>
-import { useField } from "vee-validate";
-import { withDefaults, toRefs } from "vue";
+import useBaseCheckbox from "@/composables/inputs/baseCheckbox";
+import type CheckboxProps from "@/interfaces/CheckboxProps";
+import { withDefaults } from "vue";
 
-const props = withDefaults(defineProps<ICheckboxProps>(), {
+const props = withDefaults(defineProps<CheckboxProps>(), {
   label: "Label",
   id: "id",
   disabled: false,
   checked: false,
 });
 
-const { label, id, name, disabled } = toRefs(props);
-
-const { value, errorMessage, setErrors } = useField(name, undefined, {
-  validateOnValueUpdate: false
-});
-
-const onChange = () => {
-  setErrors([]);
-}
+const { label, id, disabled, errorMessage, value, onChange } = useBaseCheckbox(props);
 </script>
 
 <style lang="scss" scoped>

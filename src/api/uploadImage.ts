@@ -1,19 +1,19 @@
 import http from '@/api/http/http'
 
 async function uploadImage(file: File): Promise<string> {
-  return (
-    await http.post(
-      'Image/SaveImage',
-      {
-        file
-      },
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+  const data = await http.post(
+    'Image/SaveImage',
+    {
+      file
+    },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
-    )
-  ).data
+    }
+  )
+  console.log(data)
+  return data.data
 }
 
 export { uploadImage }

@@ -3,14 +3,16 @@
     <div class="card__header">
       <BaseBreadcrumbs :breadcrumbs="breadcrumbs" />
       <div class="card__icons">
-        <EditIcon />
+        <router-link :to="{ name: RouteNamesEnum.editTeam, params: { id: team.id } }" class="card__edit">
+          <EditIcon />
+        </router-link>
         <DeleteIcon />
       </div>
     </div>
     <div class="card__detail">
       <div class="card__image">
         <div class="image__wrapper">
-          <img :src="team.img">
+          <img :src="team.imageUrl ? baseUrl + team.imageUrl : team.imageUrl">
         </div>
       </div>
       <div class="card__info">
@@ -19,15 +21,15 @@
         </div>
         <div class="info__item">
           <span class="info__item-title">Year of foundation</span>
-          <span>{{ team.year }}</span>
+          <span>{{ team.foundationYear || '-' }}</span>
         </div>
         <div class="info__item">
           <span class="info__item-title">Division</span>
-          <span>{{ team.division }}</span>
+          <span>{{ team.division || '-' }}</span>
         </div>
         <div class="info__item">
           <span class="info__item-title">Conference</span>
-          <span>{{ team.conference }}</span>
+          <span>{{ team.conference || '-' }}</span>
         </div>
       </div>
     </div>
@@ -43,15 +45,20 @@ export default {
 <script lang="ts" setup>
 import EditIcon from '@/components/Icons/EditIcon.vue';
 import DeleteIcon from '@/components/Icons/DeleteIcon.vue';
-import type ITeamDetailProps from '@/interfaces/ITeamDetailProps';
 import type BreadCrumbsProps from '@/interfaces/BreadcrumbsProps';
 import BaseBreadcrumbs from '@/components/Blocks/BaseBreadcrumbs.vue';
-import { ref } from 'vue';
+import { computed, toRef } from 'vue';
 import { RouteNamesEnum } from '@/router/router.types';
+import type Team from '@/api/dto/teams/Team';
+import { baseUrl } from '@/constants/constants';
 
-const team = defineProps<ITeamDetailProps>();
+const props = defineProps<{
+  team: Team
+}>();
 
-const breadcrumbs = ref<BreadCrumbsProps[]>([
+const team = toRef(() => props.team)
+
+const breadcrumbs = computed<BreadCrumbsProps[]>(() => [
   {
     text: "Teams",
     href: {
@@ -59,7 +66,7 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
     }
   },
   {
-    text: team.name
+    text: team.value.name
   }
 ])
 </script>
@@ -109,6 +116,11 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
     display: grid;
     grid-template-columns: repeat(2, auto);
     margin: 4.0625rem 0;
+  }
+
+  &__edit {
+    display: flex;
+    align-items: center;
   }
 }
 
