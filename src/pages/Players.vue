@@ -1,6 +1,12 @@
 <template>
-  <div class="subgrid">
-    <PlayerCard v-for="(player, index) in players" :key="index" :player="player" />
+  <div class="subgrid" v-show="!isEmpty">
+    <PlayerCard v-for="(player, index) in players" :key="index" :player="player"
+      :team="teams.find(findTeam(player.team as number)) as Team" />
+  </div>
+  <div class="empty" v-show="isEmpty">
+    <img src="@/assets/img/empty_players.svg" alt="" class="empty__img">
+    <span class="empty__title">Empty here</span>
+    <span class="empty__subtitle">Add new teams to continue</span>
   </div>
 </template>
 
@@ -12,65 +18,20 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import PlayerCard from "@/components/Cards/PlayerCard.vue";
-import type IPlayerCardProps from "@/interfaces/IPlayerCardProps";
-import JaylenAdamsImg from "@/assets/img/players/jaylenadams.png";
-import { inject, onMounted, ref } from "vue";
-import type TeamsSelect from "@/interfaces/TeamsSelect";
+import PlayerCard from "@/components/Cards/PlayerCard.vue"
+import type GetPlayersRequest from "@/api/dto/players/GetPlayersRequest";
+import usePlayers from "@/composables/players/players";
+import type Team from "@/api/dto/teams/Team";
 
-const players = ref<IPlayerCardProps[]>([
-  {
-    name: "Jaylen Adams",
-    number: 10,
-    team: "Portland trail blazers",
-    photo: JaylenAdamsImg
-  },
-  {
-    name: "Jaylen Adams",
-    number: 10,
-    team: "Portland trail blazers",
-    photo: JaylenAdamsImg
-  },
-  {
-    name: "Jaylen Adams",
-    number: 10,
-    team: "Portland trail blazers",
-    photo: JaylenAdamsImg
-  },
-  {
-    name: "Jaylen Adams",
-    number: 10,
-    team: "Portland trail blazers",
-    photo: JaylenAdamsImg
-  },
-]);
+const props = defineProps<{
+  params: GetPlayersRequest
+}>()
 
-const { setSelectOptions } = inject("teamsSelect") as TeamsSelect;
-
-const selectOptions = [
-  "Forward",
-  "Centralforward",
-  "Guard",
-  "AAAAAAAAA",
-  "BBBBBBBBB",
-  "CCCCCCCCC",
-  "DDDDDDDDD",
-  "EEEEEEEEE"
-];
-
-onMounted(() => setSelectOptions(selectOptions))
+const { isEmpty, players, teams, findTeam } = usePlayers(props);
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
-
-.subgrid {
-  display: grid;
-  grid-area: subgrid;
-  grid-template-columns: $subgrid-columns;
-  grid-gap: 1.25vw;
-
-  @media (max-width: 768px) {
-    grid-template-columns: $subgrid-columns-768;
-  }
-}
+@import "@/assets/scss/mixins/cards";
+@include cards;
+</style>

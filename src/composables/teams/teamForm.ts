@@ -4,7 +4,6 @@ import { isAxiosError, type AxiosError } from 'axios'
 import { useForm } from 'vee-validate'
 import { watch } from 'vue'
 import { number, object, string } from 'yup'
-import { uploadImage as uploadImageRequest } from '@/api/uploadImage'
 import useScrollToError from '../helpers/scrollToError'
 import useUploadImage from '../helpers/uploadImage'
 
@@ -26,10 +25,10 @@ export default function useTeamForm(props: {
       validationSchema: toTypedSchema(
         object({
           name: string().required().min(3).max(100),
-          foundationYear: number().integer().min(1900).max(new Date().getFullYear()),
-          division: string().nullable(),
-          conference: string().nullable(),
-          imageUrl: string().nullable()
+          foundationYear: number().required().integer().min(1900).max(new Date().getFullYear()),
+          division: string().required(),
+          conference: string().required(),
+          imageUrl: string().required()
         })
       ),
       initialValues

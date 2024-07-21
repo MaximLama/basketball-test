@@ -12,7 +12,7 @@
     <div class="card__detail">
       <div class="card__image">
         <div class="image__wrapper">
-          <img :src="team.imageUrl ? baseUrl + team.imageUrl : team.imageUrl">
+          <img :src="useImage(team.imageUrl)">
         </div>
       </div>
       <div class="card__info">
@@ -50,7 +50,7 @@ import BaseBreadcrumbs from '@/components/Blocks/BaseBreadcrumbs.vue';
 import { computed, toRef } from 'vue';
 import { RouteNamesEnum } from '@/router/router.types';
 import type Team from '@/api/dto/teams/Team';
-import { baseUrl } from '@/constants/constants';
+import useImage from '@/composables/helpers/image';
 
 const props = defineProps<{
   team: Team

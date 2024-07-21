@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <PlayerDetailCard v-bind="player" />
+    <PlayerDetailCard v-if="player" :player="player" />
   </div>
 </template>
 
@@ -11,21 +11,24 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
-import type IPlayerDetailProps from "@/interfaces/IPlayerDetailProps";
-import JaylenAdamsImg from "@/assets/img/players/jaylenadams.png";
+import { onMounted, ref } from "vue";
 import PlayerDetailCard from "@/components/Cards/PlayerDetailCard.vue";
+import { useRoute } from "vue-router";
+import type PlayerDetail from "@/api/dto/players/PlayerDetail";
+import { getPlayer as getPlayerRequest } from "@/api/players/getPlayer";
 
-const player: IPlayerDetailProps = reactive({
-  name: "Greg Whittington",
-  position: "Forward",
-  image: JaylenAdamsImg,
-  number: 22,
-  height: 206,
-  weight: 95,
-  age: 27,
-  team: "Denver Nuggets"
-});
+const route = useRoute();
+
+const player = ref<PlayerDetail | null>();
+
+const getPlayer = async () => {
+  const id = parseInt(route.params.id as string);
+  player.value = await getPlayerRequest(id);
+}
+
+onMounted(async () => {
+  await getPlayer()
+})
 </script>
 
 <style lang="scss" scoped>

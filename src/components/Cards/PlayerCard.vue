@@ -1,15 +1,15 @@
 <template>
-  <div class="card">
+  <router-link :to="{ name: RouteNamesEnum.player, params: { id } }" class="card">
     <div class="card__top">
-      <img :src="photo" class="card__image" />
+      <img v-if="avatarUrl" :src="useImage(avatarUrl)" class="card__image" />
     </div>
     <div class="card__bottom">
       <div class="card__text-box">
-        <span class="card__title">{{ name }} <span class="light-red">#{{ number }}</span></span>
-        <span class="card__subtitle">{{ team }}</span>
+        <span class="card__title">{{ name }} <span class="light-red">{{ number ? "#" + number : "-" }}</span></span>
+        <span class="card__subtitle">{{ team?.name }}</span>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script lang="ts">
@@ -19,14 +19,19 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import type IPlayerCardProps from "@/interfaces/IPlayerCardProps";
-import { toRefs } from "vue";
+import type Player from "@/api/dto/players/Player";
+import { toRef, toRefs } from "vue";
+import { RouteNamesEnum } from "@/router/router.types";
+import type Team from "@/api/dto/teams/Team";
+import useImage from "@/composables/helpers/image";
 
 const props = defineProps<{
-  player: IPlayerCardProps;
+  player: Player;
+  team?: Team;
 }>();
 
-const { name, number, team, photo } = toRefs(props.player);
+const { id, name, number, avatarUrl } = toRefs(props.player);
+const team = toRef(() => props.team);
 </script>
 
 <style lang="scss" scoped>

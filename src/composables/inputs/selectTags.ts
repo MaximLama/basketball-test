@@ -1,10 +1,8 @@
 import type TagsProps from '@/interfaces/TagsProps'
-import { onMounted, onUpdated, ref, toRef } from 'vue'
+import { onMounted, onUpdated, toRef, type Ref } from 'vue'
 
-export default function useSelectTags(props: TagsProps) {
+export default function useSelectTags(props: TagsProps, tagsEl: Ref<HTMLElement | null>) {
   const tags = toRef(() => props.tags)
-
-  const tagsEl = ref<HTMLElement | null>(null)
 
   const handleTags = () => {
     if (!tagsEl.value) return

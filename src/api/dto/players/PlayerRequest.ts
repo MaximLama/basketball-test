@@ -3,7 +3,7 @@ export default interface PlayerRequest {
   number?: number
   position: string
   team?: number
-  birthday?: Date
+  birthday?: Date | string
   height?: number
   weight?: number
   avatarUrl?: string

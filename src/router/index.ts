@@ -113,6 +113,14 @@ const routes: Readonly<RouteRecordRaw[]> = [
             meta: {
               requiresAuth: true
             }
+          },
+          {
+            path: ':id(\\d+)/edit',
+            name: RouteNamesEnum.editPlayer,
+            component: () => import('@/pages/EditPlayer.vue'),
+            meta: {
+              requiresAuth: true
+            }
           }
         ]
       }

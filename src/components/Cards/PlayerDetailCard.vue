@@ -3,19 +3,21 @@
     <div class="card__header">
       <BaseBreadcrumbs :breadcrumbs="breadcrumbs" />
       <div class="card__icons">
-        <EditIcon />
+        <router-link :to="{ name: RouteNamesEnum.editPlayer, params: { id: player.id } }" class="card__edit">
+          <EditIcon />
+        </router-link>
         <DeleteIcon />
       </div>
     </div>
     <div class="card__detail">
       <div class="card__image">
         <div class="image__wrapper">
-          <img :src="player.image">
+          <img :src="useImage(player.avatarUrl)">
         </div>
       </div>
       <div class="card__info">
         <div class="info__item-header">
-          <span>{{ player.name }} <span class="light-red">#{{ player.number }}</span></span>
+          <span>{{ player.name }} <span class="light-red">{{ player.number ? '#' + player.number : '-' }}</span></span>
         </div>
         <div class="info__item">
           <span class="info__item-title">Position</span>
@@ -23,7 +25,7 @@
         </div>
         <div class="info__item">
           <span class="info__item-title">Team</span>
-          <span>{{ player.team }}</span>
+          <span>{{ player.teamName }}</span>
         </div>
         <div class="info__item">
           <span class="info__item-title">Height</span>
@@ -35,7 +37,7 @@
         </div>
         <div class="info__item">
           <span class="info__item-title">Age</span>
-          <span>{{ player.age }}</span>
+          <span>{{ age }}</span>
         </div>
       </div>
     </div>
@@ -51,13 +53,29 @@ export default {
 <script lang="ts" setup>
 import EditIcon from '@/components/Icons/EditIcon.vue';
 import DeleteIcon from '@/components/Icons/DeleteIcon.vue';
-import type IPlayerDetailProps from '@/interfaces/IPlayerDetailProps';
 import type BreadCrumbsProps from '@/interfaces/BreadcrumbsProps';
 import BaseBreadcrumbs from '@/components/Blocks/BaseBreadcrumbs.vue';
-import { ref } from 'vue';
+import { computed, ref, toRef } from 'vue';
 import { RouteNamesEnum } from '@/router/router.types';
+import type PlayerDetail from '@/api/dto/players/PlayerDetail';
+import useImage from '@/composables/helpers/image';
 
-const player = defineProps<IPlayerDetailProps>();
+const props = defineProps<{ player: PlayerDetail }>();
+const player = toRef(() => props.player);
+
+const age = computed(() => {
+  if (!player.value.birthday) return undefined;
+  const today = new Date();
+  const birth = new Date(player.value.birthday);
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDifference = today.getMonth() - birth.getMonth();
+
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+
+  return age;
+})
 
 const breadcrumbs = ref<BreadCrumbsProps[]>([
   {
@@ -67,7 +85,7 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
     }
   },
   {
-    text: player.name
+    text: player.value.name
   }
 ]);
 </script>
@@ -125,6 +143,11 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
     @media (max-width: 1440px) {
       grid-template-columns: $detail-card-template-1440;
     }
+  }
+
+  &__edit {
+    display: flex;
+    align-items: center;
   }
 }
 

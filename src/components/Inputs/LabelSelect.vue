@@ -2,39 +2,29 @@
   <div class="input__wrapper">
     <label class="input__label"> {{ label }}</label>
     <div class="input__inner">
-      <BaseSelect :options="options" selectClass="input__select" hoverSelectClass="input__select--hover" />
-      <!--input class="input" :class="{
-        'input--error': error !== '',
-        'input--password': type === 'password',
-      }" :type="type" v-model="model" :disabled="disabled" />
-      <span class="input__eye" v-if="type === 'password'"></span-->
+      <BaseSelect :options="options" selectClass="input__select" hoverSelectClass="input__select--hover"
+        @change="onChange" :init="init" />
     </div>
-    <span class="input__error-msg">{{ error }}</span>
+    <span class="input__error-msg" v-show="errorMessage">{{ errorMessage }}</span>
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "BaseInput",
+  name: "LabelSelect",
 };
-
-interface LabelSelectProps {
-  label: string;
-  options: string[];
-  error?: string;
-}
 </script>
 
 <script lang="ts" setup>
-import { toRefs } from "vue";
 import BaseSelect from "@/components/Inputs/BaseSelect.vue";
+import type LabelSelectProps from "@/interfaces/LabelSelectProps";
+import useLabelSelect from "@/composables/inputs/labelSelect";
 
 const props = withDefaults(defineProps<LabelSelectProps>(), {
   label: "Label",
-  error: "",
 });
 
-const { label, options, error } = toRefs(props);
+const { label, options, errorMessage, onChange, init } = useLabelSelect(props);
 </script>
 
 <style lang="scss" scoped>

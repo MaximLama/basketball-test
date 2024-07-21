@@ -4,14 +4,15 @@
       <div class="breadcrumbs__wrapper">
         <BaseBreadcrumbs :breadcrumbs="breadcrumbs" />
       </div>
-      <PlayerForm :submit="onSubmit" :error="onError" :positions="positions" :teams="teams" ref="form" />
+      <PlayerForm :player="player" :submit="onSubmit" :error="onError" :positions="positions" :teams="teams"
+        ref="form" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "AddPlayer"
+  name: "EditPlayer"
 };
 </script>
 
@@ -21,12 +22,15 @@ import BaseBreadcrumbs from "@/components/Blocks/BaseBreadcrumbs.vue";
 import type BreadCrumbsProps from "@/interfaces/BreadcrumbsProps";
 import { onMounted, ref } from "vue";
 import { RouteNamesEnum } from "@/router/router.types";
-import type PlayerRequest from "@/api/dto/players/PlayerRequest";
-import type { AxiosError } from "axios";
-import { addPlayer } from "@/api/players/addPlayer";
-import { getPositions } from "@/api/players/getPositions";
 import type Team from "@/api/dto/teams/Team";
+import type { AxiosError } from "axios";
+import { getPositions } from "@/api/players/getPositions";
 import { getTeams } from "@/api/teams/getTeams";
+import type PlayerRequest from "@/api/dto/players/PlayerRequest";
+import type Player from "@/api/dto/players/Player";
+import { useRoute } from "vue-router";
+import { getPlayer } from "@/api/players/getPlayer";
+import { editPlayer } from "@/api/players/editPlayer";
 
 const breadcrumbs = ref<BreadCrumbsProps[]>([
   {
@@ -36,14 +40,28 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
     }
   },
   {
-    text: "Add new player"
+    text: "Edit player"
   }
 ])
 
 const form = ref<typeof PlayerForm>();
 
+const route = useRoute();
+const positions = ref<string[]>([]);
+const teams = ref<Team[]>([]);
+const player = ref<Player>();
+
+onMounted(async () => {
+  const id = parseInt(route.params.id as string);
+  player.value = await getPlayer(id);
+  positions.value = await getPositions();
+  teams.value = (await getTeams()).data;
+})
+
 const onSubmit = async (values: PlayerRequest) => {
-  await addPlayer(values);
+  if (player.value) {
+    await editPlayer({ ...values, id: player.value.id })
+  }
 }
 
 const onError = (e: AxiosError) => {
@@ -51,14 +69,6 @@ const onError = (e: AxiosError) => {
     form.value?.setFieldError('name', 'Given name already exists')
   }
 }
-
-const positions = ref<string[]>([]);
-const teams = ref<Team[]>([]);
-
-onMounted(async () => {
-  positions.value = await getPositions();
-  teams.value = (await getTeams()).data;
-})
 </script>
 
 <style lang="scss" scoped>

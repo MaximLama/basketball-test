@@ -1,7 +1,7 @@
 <template>
   <div class="tags" ref="tagsEl">
-    <div class="tag" v-for="tag in tags" :key="tag">
-      <span>{{ tag }}</span>
+    <div class="tag" v-for="tag in tags" :key="tag.value">
+      <span>{{ tag.name }}</span>
       <div class="tag__icon" @click.prevent.stop="$emit('remove', tag)">
         <ClearIcon />
       </div>
@@ -20,15 +20,19 @@ export default {
 import ClearIcon from '@/components/Icons/ClearIcon.vue';
 import type TagsProps from '@/interfaces/TagsProps';
 import useSelectTags from '@/composables/inputs/selectTags';
+import { ref } from 'vue';
+import type IteratorSelectOption from '@/interfaces/IteratorSelectOption';
 
 const props = withDefaults(defineProps<TagsProps>(), {
-  tags: () => new Set() as Set<string>
+  tags: () => [] as IteratorSelectOption[]
 })
 
-const tags = useSelectTags(props);
+const tagsEl = ref<HTMLElement | null>(null)
+
+const tags = useSelectTags(props, tagsEl);
 
 defineEmits<{
-  remove: [value: string]
+  remove: [value: IteratorSelectOption]
 }>();
 </script>
 

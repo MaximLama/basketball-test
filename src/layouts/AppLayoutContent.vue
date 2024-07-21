@@ -5,13 +5,13 @@
         <SearchInput :value="searchName" @change="setSearchName" />
       </div>
       <div class="select__wrapper" v-if="isSelectActive">
-        <BaseSelect :options="selectOptions" :multiple="true" />
+        <BaseSelect :options="selectOptions" :multiple="true" @changeMultiple="onChange" />
       </div>
       <div class="add-btn__wrapper">
         <AddButton :to="addButtonTo" />
       </div>
       <router-view v-slot="{ Component }">
-        <component :is="Component" :params="{ pageSize, page: currentPage, name: searchName }">
+        <component :is="Component" :params="{ pageSize, page: currentPage, name: searchName, teamIds: selectValues }">
         </component>
       </router-view>
       <BasePagination :total="pageCount" :currentPage="currentPage" />
@@ -42,7 +42,7 @@ const { paginationOptions, pageSize, currentPage, pageCount } = usePagination();
 
 const { searchName, setSearchName } = useSearch();
 
-const { isSelectActive, selectOptions } = useTeamsSelect();
+const { isSelectActive, selectOptions, onChange, selectValues } = useTeamsSelect();
 
 const route = useRoute();
 const addButtonTo = computed(() => {

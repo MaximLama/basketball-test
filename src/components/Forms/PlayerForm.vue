@@ -6,8 +6,8 @@
     <form @submit.prevent="onSubmit" class="right">
       <div class="right__inner">
         <BaseInput label="Name" type="text" name="name" />
-        <LabelSelect label="Position" :options="positions" name="position" />
-        <LabelSelect label="Team" :options="teams" name="team" />
+        <LabelSelect label="Position" :options="props.positions" name="position" :init="position" />
+        <LabelSelect label="Team" :options="props.teams" name="team" :init="team" />
         <div class="row">
           <BaseInput label="Height" type="text" name="height" />
           <BaseInput label="Weight" type="text" name="weight" />
@@ -18,7 +18,7 @@
         </div>
         <div class="row">
           <SecondaryButton name="Cancel" @click.prevent="$router.push({ name: RouteNamesEnum.players })" />
-          <BaseButton name="Save" />
+          <BaseButton name="Save" :disabled="isSubmitting" />
         </div>
       </div>
     </form>
@@ -37,67 +37,14 @@ import BaseInput from '@/components/Inputs/BaseInput.vue';
 import LabelSelect from '@/components/Inputs/LabelSelect.vue';
 import BaseButton from '@/components/Buttons/BaseButton.vue';
 import SecondaryButton from '@/components/Buttons/SecondaryButton.vue';
-import { ref, watch } from 'vue';
 import { RouteNamesEnum } from '@/router/router.types';
-import type PlayerRequest from '@/api/dto/players/PlayerRequest';
-import type { AxiosError } from 'axios';
-import { useForm } from 'vee-validate';
-import { toTypedSchema } from '@vee-validate/yup';
-import { date, number, object, string } from 'yup';
+import type PlayerFormProps from '@/interfaces/PlayerFormProps';
+import usePlayerForm from '@/composables/players/playerForm';
 
-const props = defineProps<{
-  submit: (values: PlayerRequest) => Promise<void>
-  error: (e: AxiosError) => void
-  player?: PlayerRequest
-}>();
+const props = defineProps<PlayerFormProps>();
 
-const initialValues = {
-  name: '',
-  number: undefined,
-  position: '',
-  team: undefined,
-  birthday: undefined,
-  height: undefined,
-  weight: undefined,
-  avatarUrl: undefined
-}
+const { uploadImage, onSubmit, isSubmitting, position, team } = usePlayerForm(props);
 
-const { handleSubmit, isSubmitting, setFieldError, setFieldValue, errors, resetForm } =
-  useForm<PlayerRequest>({
-    validationSchema: toTypedSchema(
-      object({
-        name: string().required().min(3).max(100),
-        number: number().integer().positive(),
-        position: string().required(),
-        team: number().integer().positive(),
-        birthday: date().max(new Date()),
-        height: number().integer().positive(),
-        weight: number().integer().positive(),
-        avatarUrl: string().nullable()
-      })
-    ),
-    initialValues
-  })
-
-watch(
-  () => props.player,
-  (newPlayer) => {
-    if (newPlayer) {
-      resetForm({ values: newPlayer })
-    }
-  }
-)
-
-const positions = ref([
-  "Forward",
-  "Center",
-  "Guard"
-]);
-
-const teams = ref([
-  "A",
-  "B"
-])
 </script>
 
 <style lang="scss" scoped>

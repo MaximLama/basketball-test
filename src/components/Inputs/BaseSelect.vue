@@ -3,8 +3,8 @@
     <div class="selected__wrapper" :class="[selectClass]" @click.prevent="active = !active">
       <div class="selected">
         <span v-show="activePlaceholder">{{ placeholder }}</span>
-        <span class="selected__text" v-show="!multiple && selected">{{ selected }}</span>
-        <SelectTags :tags="tags" v-show="multiple && tags.size" @remove="removeTag" />
+        <span class="selected__text" v-show="!multiple && selected">{{ selected?.name }}</span>
+        <SelectTags :tags="tags" v-show="multiple && tags.length" @remove="removeTag" />
       </div>
       <div class="clear" v-show="activeClear" @click.prevent.stop="clear">
         <ClearIcon />
@@ -14,9 +14,9 @@
       </div>
     </div>
     <div class="items" :class="{ 'active': active }">
-      <div class="item" v-for="option in options" :key="option" @click.prevent="select(option)"
-        :class="{ active: tags.has(option) }">{{
-          option }}</div>
+      <div class="item" v-for="option in selectOptions" :key="option.value" @click.prevent="select(option)"
+        :class="{ active: indexOfTag(option) !== -1 }">{{
+          option.name }}</div>
     </div>
   </div>
 </template>
@@ -25,8 +25,6 @@
 export default {
   name: "BaseSelect"
 }
-
-
 </script>
 
 <script lang="ts" setup>
@@ -40,9 +38,12 @@ const props = withDefaults(defineProps<BaseSelectProps>(), {
   multiple: false,
   selectClass: '',
 });
+const emit = defineEmits<{
+  change: [value: string | number | undefined],
+  changeMultiple: [value: (string | number)[] | undefined]
+}>();
 
 const {
-  options,
   selectClass,
   placeholder,
   select,
@@ -52,8 +53,10 @@ const {
   activePlaceholder,
   activeClear,
   selected,
-  tags
-} = useBaseSelect(props);
+  tags,
+  selectOptions,
+  indexOfTag
+} = useBaseSelect(props, emit);
 
 </script>
 

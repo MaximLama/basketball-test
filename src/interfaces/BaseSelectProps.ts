@@ -1,5 +1,8 @@
+import type { BaseSelectOption } from '@/interfaces/BaseSelectOption'
+
 export default interface BaseSelectProps {
-  options: string[]
+  options: BaseSelectOption[]
   multiple?: boolean
   selectClass?: string
+  init?: string | number
 }
