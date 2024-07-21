@@ -27,8 +27,9 @@ import type { AxiosError } from "axios";
 import { getTeams } from "@/api/teams/getTeams";
 import type PlayerRequest from "@/api/dto/players/PlayerRequest";
 import type Player from "@/api/dto/players/Player";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { usePlayerStore } from "@/stores/players";
+import Error404 from "@/errors/error404";
 
 const breadcrumbs = ref<BreadCrumbsProps[]>([
   {
@@ -45,6 +46,7 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
 const form = ref<typeof PlayerForm>();
 
 const route = useRoute();
+const router = useRouter();
 const positions = ref<string[]>([]);
 const teams = ref<Team[]>([]);
 const player = ref<Player>();
@@ -52,7 +54,14 @@ const playerStore = usePlayerStore();
 
 onMounted(async () => {
   const id = parseInt(route.params.id as string);
-  player.value = await playerStore.getPlayer(id);
+  try {
+    player.value = await playerStore.getPlayer(id);
+  }
+  catch (e) {
+    if (e instanceof Error404) {
+      router.push({ name: RouteNamesEnum.error404 })
+    }
+  }
   positions.value = await playerStore.getPositions();
   teams.value = (await getTeams()).data;
 })

@@ -22,10 +22,11 @@ import type BreadCrumbsProps from "@/interfaces/BreadcrumbsProps";
 import { onMounted, ref } from "vue";
 import { RouteNamesEnum } from "@/router/router.types";
 import type Team from "@/api/dto/teams/Team";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import type TeamRequest from "@/api/dto/teams/TeamRequest";
 import type { AxiosError } from "axios";
 import { useTeamStore } from "@/stores/teams";
+import Error404 from "@/errors/error404";
 
 const breadcrumbs = ref<BreadCrumbsProps[]>([
   {
@@ -41,12 +42,20 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
 
 const team = ref<Team>();
 const route = useRoute();
+const router = useRouter();
 const form = ref<typeof TeamForm>();
 const teamStore = useTeamStore();
 
 onMounted(async () => {
   const id = parseInt(route.params.id as string);
-  team.value = await teamStore.getTeam(id);
+  try {
+    team.value = await teamStore.getTeam(id);
+  }
+  catch (e) {
+    if (e instanceof Error404) {
+      router.push({ name: RouteNamesEnum.error404 })
+    }
+  }
 })
 
 const onSubmit = async (values: TeamRequest) => {

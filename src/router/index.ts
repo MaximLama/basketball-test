@@ -127,9 +127,9 @@ const routes: Readonly<RouteRecordRaw[]> = [
     ]
   },
   {
-    path: '/:catchAll(.*)',
+    path: '/:catchAll(.*)*',
     name: RouteNamesEnum.error404,
-    component: () => import('@/layouts/AppLayoutDefault.vue')
+    component: () => import('@/pages/404.vue')
   }
 ]
 

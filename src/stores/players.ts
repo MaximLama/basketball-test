@@ -8,6 +8,7 @@ import { getPlayer as getPlayerRequest } from '@/api/players/getPlayer'
 import { editPlayer as editedPlayerRequest } from '@/api/players/editPlayer'
 import type Player from '@/api/dto/players/Player'
 import { getPositions as getPositionsRequest } from '@/api/players/getPositions'
+import Error404 from '@/errors/error404'
 
 interface PlayersStore {
   [key: PlayerDetail['id']]: PlayerDetail
@@ -21,8 +22,14 @@ export const usePlayerStore = defineStore('player', () => {
   const addPlayer = async (player: PlayerRequest) => {
     const newPlayer: PlayerDetail = await addPlayerRequest(player)
     if (newPlayer.team) {
-      const team = await teamStore.getTeam(newPlayer.team)
-      newPlayer.teamName = team.name
+      try {
+        const team = await teamStore.getTeam(newPlayer.team)
+        newPlayer.teamName = team.name
+      } catch (e) {
+        if (e instanceof Error404) {
+          newPlayer.teamName = undefined
+        }
+      }
     }
     players.value[newPlayer.id] = newPlayer
   }
@@ -39,8 +46,15 @@ export const usePlayerStore = defineStore('player', () => {
   const editPlayer = async (player: Player) => {
     const editedPlayer: PlayerDetail = await editedPlayerRequest(player)
     if (editedPlayer.team) {
-      const team = await teamStore.getTeam(editedPlayer.team)
-      editedPlayer.teamName = team.name
+      try {
+        const team = await teamStore.getTeam(editedPlayer.team)
+        editedPlayer.teamName = team.name
+      } catch (e) {
+        if (e instanceof Error404) {
+          editedPlayer.team = undefined
+          editedPlayer.teamName = undefined
+        }
+      }
     }
     players.value[editedPlayer.id] = editedPlayer
   }
