@@ -3,27 +3,29 @@
     <div class="roster__header">
       Roster
     </div>
-    <span class="roster__attribute">#</span>
-    <span class="roster__attribute">Player</span>
-    <span class="roster__attribute">Height</span>
-    <span class="roster__attribute">Weight</span>
-    <span class="roster__attribute">Age</span>
-    <template v-for="(teammate, index) in teammates" :key="teammate.number">
-      <div class="item__number" :class="{ 'last': index === teammates.length - 1 }">{{ teammate.number }}</div>
-      <div class="item__detail" :class="{ 'last': index === teammates.length - 1 }">
+    <span class="roster__attribute" :class="{ 'last': isLast() }">#</span>
+    <span class="roster__attribute" :class="{ 'last': isLast() }">Player</span>
+    <span class="roster__attribute" :class="{ 'last': isLast() }">Height</span>
+    <span class="roster__attribute" :class="{ 'last': isLast() }">Weight</span>
+    <span class="roster__attribute" :class="{ 'last': isLast() }">Age</span>
+    <template v-for="(player, index) in players" :key="player.id">
+      <div class="item__number" :class="{ 'last': isLast(index) }">{{ player.number ? player.number : '-'
+        }}
+      </div>
+      <div class="item__detail" :class="{ 'last': isLast(index) }">
         <div class="item__detail-wrapper">
           <div class="item__detail-image">
-            <img :src="teammate.image">
+            <img :src="useImage(player.avatarUrl)">
           </div>
           <div class="item__detail-info">
-            <span class="item__detail-name">{{ teammate.name }}</span>
-            <span class="item__detail-position">{{ teammate.position }}</span>
+            <span class="item__detail-name">{{ player.name }}</span>
+            <span class="item__detail-position">{{ player.position }}</span>
           </div>
         </div>
       </div>
-      <div class="item__height" :class="{ 'last': index === teammates.length - 1 }">{{ teammate.height }}</div>
-      <div class="item__weight" :class="{ 'last': index === teammates.length - 1 }">{{ teammate.weight }}</div>
-      <div class="item__age" :class="{ 'last': index === teammates.length - 1 }">{{ teammate.age }}</div>
+      <div class="item__height" :class="{ 'last': isLast(index) }">{{ player.height }} cm</div>
+      <div class="item__weight" :class="{ 'last': isLast(index) }">{{ player.weight }} kg</div>
+      <div class="item__age" :class="{ 'last': isLast(index) }">{{ usePlayerAge(player.birthday) }}</div>
     </template>
   </div>
 </template>
@@ -35,14 +37,20 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type IPlayerProps from '@/interfaces/IPlayerProps';
+import type Player from '@/api/dto/players/Player';
+import useImage from '@/composables/helpers/image';
+import usePlayerAge from '@/composables/players/playerAge';
 import { toRef } from 'vue';
 
 const props = defineProps<{
-  teammates: IPlayerProps[]
+  players: Player[]
 }>();
 
-const teammates = toRef(() => props.teammates);
+const players = toRef(() => props.players);
+
+const isLast = (index?: number) => {
+  return typeof index === 'undefined' ? players.value.length === 0 : index === players.value.length - 1
+}
 </script>
 
 <style lang="scss" scoped>
@@ -73,6 +81,10 @@ const teammates = toRef(() => props.teammates);
     align-items: center;
     border-bottom: $default-border;
     height: 100%;
+
+    &.last {
+      border-bottom: none;
+    }
   }
 
   &__attribute:first-of-type {
@@ -98,12 +110,16 @@ const teammates = toRef(() => props.teammates);
     }
 
     &-image {
-      display: block;
+      display: flex;
       width: 2.5rem;
       height: 2.5rem;
+      flex-shrink: 0;
 
       img {
-        object-fit: cover;
+        max-width: 100%;
+        max-height: 100%;
+        flex-grow: 1;
+        object-fit: contain;
         object-position: center;
         border-radius: 50%;
       }

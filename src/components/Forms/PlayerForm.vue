@@ -43,8 +43,11 @@ import usePlayerForm from '@/composables/players/playerForm';
 
 const props = defineProps<PlayerFormProps>();
 
-const { uploadImage, onSubmit, isSubmitting, position, team } = usePlayerForm(props);
+const { uploadImage, onSubmit, isSubmitting, position, team, setFieldError } = usePlayerForm(props);
 
+defineExpose({
+  setFieldError
+})
 </script>
 
 <style lang="scss" scoped>

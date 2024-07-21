@@ -55,27 +55,16 @@ import EditIcon from '@/components/Icons/EditIcon.vue';
 import DeleteIcon from '@/components/Icons/DeleteIcon.vue';
 import type BreadCrumbsProps from '@/interfaces/BreadcrumbsProps';
 import BaseBreadcrumbs from '@/components/Blocks/BaseBreadcrumbs.vue';
-import { computed, ref, toRef } from 'vue';
+import { ref, toRef } from 'vue';
 import { RouteNamesEnum } from '@/router/router.types';
 import type PlayerDetail from '@/api/dto/players/PlayerDetail';
 import useImage from '@/composables/helpers/image';
+import usePlayerAge from '@/composables/players/playerAge';
 
 const props = defineProps<{ player: PlayerDetail }>();
 const player = toRef(() => props.player);
 
-const age = computed(() => {
-  if (!player.value.birthday) return undefined;
-  const today = new Date();
-  const birth = new Date(player.value.birthday);
-  let age = today.getFullYear() - birth.getFullYear();
-  const monthDifference = today.getMonth() - birth.getMonth();
-
-  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birth.getDate())) {
-    age--;
-  }
-
-  return age;
-})
+const age = usePlayerAge(player.value.birthday);
 
 const breadcrumbs = ref<BreadCrumbsProps[]>([
   {

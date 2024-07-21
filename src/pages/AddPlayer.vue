@@ -23,10 +23,9 @@ import { onMounted, ref } from "vue";
 import { RouteNamesEnum } from "@/router/router.types";
 import type PlayerRequest from "@/api/dto/players/PlayerRequest";
 import type { AxiosError } from "axios";
-import { addPlayer } from "@/api/players/addPlayer";
-import { getPositions } from "@/api/players/getPositions";
 import type Team from "@/api/dto/teams/Team";
 import { getTeams } from "@/api/teams/getTeams";
+import { usePlayerStore } from "@/stores/players";
 
 const breadcrumbs = ref<BreadCrumbsProps[]>([
   {
@@ -41,9 +40,10 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
 ])
 
 const form = ref<typeof PlayerForm>();
+const playerStore = usePlayerStore();
 
 const onSubmit = async (values: PlayerRequest) => {
-  await addPlayer(values);
+  await playerStore.addPlayer(values);
 }
 
 const onError = (e: AxiosError) => {
@@ -56,7 +56,7 @@ const positions = ref<string[]>([]);
 const teams = ref<Team[]>([]);
 
 onMounted(async () => {
-  positions.value = await getPositions();
+  positions.value = await playerStore.getPositions();
   teams.value = (await getTeams()).data;
 })
 </script>

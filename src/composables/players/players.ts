@@ -51,7 +51,6 @@ export default function usePlayers(props: { params: GetPlayersRequest }) {
   watch(
     params,
     () => {
-      console.log(params)
       getPlayers()
     },
     {

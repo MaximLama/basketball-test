@@ -22,11 +22,10 @@ import type BreadCrumbsProps from "@/interfaces/BreadcrumbsProps";
 import { onMounted, ref } from "vue";
 import { RouteNamesEnum } from "@/router/router.types";
 import type Team from "@/api/dto/teams/Team";
-import { getTeam } from "@/api/teams/getTeam";
 import { useRoute } from "vue-router";
 import type TeamRequest from "@/api/dto/teams/TeamRequest";
 import type { AxiosError } from "axios";
-import { editTeam } from "@/api/teams/editTeam";
+import { useTeamStore } from "@/stores/teams";
 
 const breadcrumbs = ref<BreadCrumbsProps[]>([
   {
@@ -43,15 +42,16 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
 const team = ref<Team>();
 const route = useRoute();
 const form = ref<typeof TeamForm>();
+const teamStore = useTeamStore();
 
 onMounted(async () => {
   const id = parseInt(route.params.id as string);
-  team.value = await getTeam(id);
+  team.value = await teamStore.getTeam(id);
 })
 
 const onSubmit = async (values: TeamRequest) => {
   if (team.value) {
-    await editTeam({ ...values, id: team.value.id })
+    await teamStore.editTeam({ ...values, id: team.value.id })
   }
 }
 const onError = (e: AxiosError) => {

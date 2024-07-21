@@ -21,9 +21,9 @@ import BaseBreadcrumbs from "@/components/Blocks/BaseBreadcrumbs.vue";
 import type BreadCrumbsProps from "@/interfaces/BreadcrumbsProps";
 import { ref } from "vue";
 import { RouteNamesEnum } from "@/router/router.types";
-import { addTeam } from "@/api/teams/addTeam";
 import type TeamRequest from "@/api/dto/teams/TeamRequest";
 import { type AxiosError } from "axios";
+import { useTeamStore } from "@/stores/teams";
 
 const breadcrumbs = ref<BreadCrumbsProps[]>([
   {
@@ -37,10 +37,12 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
   }
 ])
 
+const teamStore = useTeamStore();
+
 const form = ref<typeof TeamForm>();
 
 const onSubmit = async (values: TeamRequest) => {
-  await addTeam(values);
+  await teamStore.addTeam(values);
 }
 
 const onError = (e: AxiosError) => {

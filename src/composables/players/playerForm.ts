@@ -78,5 +78,5 @@ export default function usePlayerForm(props: PlayerFormProps) {
   const position = computed(() => props.player?.position)
   const team = computed(() => props.player?.team)
 
-  return { uploadImage, onSubmit, isSubmitting, position, team }
+  return { uploadImage, onSubmit, isSubmitting, position, team, setFieldError }
 }

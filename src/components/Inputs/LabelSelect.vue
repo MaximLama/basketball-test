@@ -1,7 +1,7 @@
 <template>
   <div class="input__wrapper">
     <label class="input__label"> {{ label }}</label>
-    <div class="input__inner">
+    <div class="input__inner" :name="props.name">
       <BaseSelect :options="options" selectClass="input__select" hoverSelectClass="input__select--hover"
         @change="onChange" :init="init" />
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="upload__wrapper">
-    <label class="upload">
+    <label class="upload" :name="props.name">
       <input type="file" class="upload__input" @change="onFileChange">
       <div class="upload__image-wrapper">
         <img class="upload__image" :src="imageUrl ? baseUrl + imageUrl : imageUrl" alt="">
