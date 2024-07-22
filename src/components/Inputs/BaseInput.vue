@@ -5,8 +5,10 @@
       <input class="input" :class="{
         'input--error': errorMessage,
         'input--password': type === 'password',
-      }" :type="type" v-model="value" :name="name" :disabled="disabled" @input="onChange" />
-      <span class="input__eye" v-if="type === 'password'"></span>
+      }" :type="type === 'password' ? getPasswordType() : type" v-model="value" :name="name" :disabled="disabled"
+        @input="onChange" />
+      <span class="input__eye" :class="{ 'input__eye--closed': isEyeClosed }" v-if="type === 'password'"
+        @click.prevent="toggleEye"></span>
       <span class="input__date" v-if="type === 'date'"></span>
     </div>
     <span class="error-msg">{{ errorMessage }}</span>
@@ -29,7 +31,18 @@ const props = withDefaults(defineProps<InputProps>(), {
   disabled: false,
 });
 
-const { label, type, disabled, name, value, errorMessage, onChange } = useBaseInput(props);
+const {
+  label,
+  type,
+  disabled,
+  name,
+  value,
+  errorMessage,
+  onChange,
+  isEyeClosed,
+  toggleEye,
+  getPasswordType
+} = useBaseInput(props);
 
 </script>
 
@@ -78,7 +91,7 @@ const { label, type, disabled, name, value, errorMessage, onChange } = useBaseIn
   }
 
   &__eye {
-    background: url("@/assets/img/icons/password_eye.svg") 0 0 no-repeat;
+    background: url("@/assets/img/icons/password_eye_opened.svg") 0 0 no-repeat;
     display: block;
     width: 1rem;
     height: 1rem;
@@ -86,6 +99,11 @@ const { label, type, disabled, name, value, errorMessage, onChange } = useBaseIn
     right: 0.75rem;
     top: 50%;
     transform: translateY(-50%);
+    cursor: pointer;
+
+    &--closed {
+      background: url("@/assets/img/icons/password_eye_closed.svg") 0 0 no-repeat;
+    }
   }
 
   &__date {

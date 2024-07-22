@@ -34,10 +34,10 @@ export default {
   width: $error404-w;
   padding: $error404-p;
 
-  @media (max-width: 875px) {
+  @media (max-width: 930px) {
     align-self: self-start;
-    width: $error404-w-875;
-    padding: $error404-p-875;
+    width: $error404-w-930;
+    padding: $error404-p-930;
   }
 
   &__img {
@@ -54,10 +54,10 @@ export default {
     margin-bottom: $error404-title-mb;
     text-align: center;
 
-    @media (max-width: 875px) {
-      font-size: $error404-title-fs-875;
-      line-height: $error404-title-lh-875;
-      margin-bottom: $error404-title-mb-875;
+    @media (max-width: 930px) {
+      font-size: $error404-title-fs-930;
+      line-height: $error404-title-lh-930;
+      margin-bottom: $error404-title-mb-930;
     }
   }
 
@@ -66,9 +66,9 @@ export default {
     line-height: $error404-subtitle-lh;
     text-align: center;
 
-    @media (max-width: 875px) {
-      font-size: $error404-subtitle-fs-875;
-      line-height: $error404-subtitle-lh-875;
+    @media (max-width: 930px) {
+      font-size: $error404-subtitle-fs-930;
+      line-height: $error404-subtitle-lh-930;
     }
   }
 }

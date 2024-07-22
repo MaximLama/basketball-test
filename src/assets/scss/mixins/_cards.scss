@@ -25,11 +25,11 @@
     border-radius: $empty-br;
     padding: $empty-p;
 
-    @media (max-width: 875px) {
+    @media (max-width: 930px) {
       align-self: self-start;
-      width: $empty-w-875;
-      border-radius: $empty-br-875;
-      padding: $empty-p-875;
+      width: $empty-w-930;
+      border-radius: $empty-br-930;
+      padding: $empty-p-930;
     }
 
     &__img {
@@ -46,10 +46,10 @@
       margin-bottom: $empty-title-mb;
       text-align: center;
 
-      @media (max-width: 875px) {
-        margin-bottom: $empty-title-mb-875;
-        font-size: $empty-title-fs-875;
-        line-height: $empty-title-lh-875;
+      @media (max-width: 930px) {
+        margin-bottom: $empty-title-mb-930;
+        font-size: $empty-title-fs-930;
+        line-height: $empty-title-lh-930;
       }
     }
 
@@ -58,9 +58,9 @@
       line-height: $empty-subtitle-lh;
       text-align: center;
 
-      @media (max-width: 875px) {
-        font-size: $empty-subtitle-fs-875;
-        line-height: $empty-subtitle-lh-875;
+      @media (max-width: 930px) {
+        font-size: $empty-subtitle-fs-930;
+        line-height: $empty-subtitle-lh-930;
       }
     }
   }
@@ -71,10 +71,10 @@
     }
   }
 
-  @media (max-width: 875px) {
+  @media (max-width: 930px) {
     .subgrid,
     .empty {
-      margin-bottom: $grid-mb-875;
+      margin-bottom: $grid-mb-930;
     }
   }
 }

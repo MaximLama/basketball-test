@@ -55,40 +55,15 @@ export default {
 <script lang="ts" setup>
 import EditIcon from '@/components/Icons/EditIcon.vue';
 import DeleteIcon from '@/components/Icons/DeleteIcon.vue';
-import type BreadCrumbsProps from '@/interfaces/BreadcrumbsProps';
 import BaseBreadcrumbs from '@/components/Blocks/BaseBreadcrumbs.vue';
-import { ref, toRef } from 'vue';
 import { RouteNamesEnum } from '@/router/router.types';
 import type PlayerDetail from '@/api/dto/players/PlayerDetail';
 import useImage from '@/composables/helpers/image';
-import usePlayerAge from '@/composables/players/playerAge';
-import { usePlayerStore } from '@/stores/players';
-import { useRouter } from 'vue-router';
+import usePlayerDetailCard from '@/composables/players/playerDetailCard';
 
 const props = defineProps<{ player: PlayerDetail }>();
-const player = toRef(() => props.player);
-const playerStore = usePlayerStore();
 
-const router = useRouter();
-
-const age = usePlayerAge(player.value.birthday);
-
-const breadcrumbs = ref<BreadCrumbsProps[]>([
-  {
-    text: "Players",
-    href: {
-      name: RouteNamesEnum.players
-    }
-  },
-  {
-    text: player.value.name
-  }
-]);
-
-const deletePlayer = async () => {
-  await playerStore.deletePlayer(player.value.id)
-  router.push({ name: RouteNamesEnum.players })
-}
+const { breadcrumbs, player, age, deletePlayer } = usePlayerDetailCard(props);
 </script>
 
 <style lang="scss" scoped>

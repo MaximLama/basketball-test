@@ -18,39 +18,12 @@ export default {
 <script lang="ts" setup>
 import TeamForm from "@/components/Forms/TeamForm.vue";
 import BaseBreadcrumbs from "@/components/Blocks/BaseBreadcrumbs.vue";
-import type BreadCrumbsProps from "@/interfaces/BreadcrumbsProps";
 import { ref } from "vue";
-import { RouteNamesEnum } from "@/router/router.types";
-import type TeamRequest from "@/api/dto/teams/TeamRequest";
-import { type AxiosError } from "axios";
-import { useTeamStore } from "@/stores/teams";
+import useAddTeam from "@/composables/teams/addTeam";
 
-const breadcrumbs = ref<BreadCrumbsProps[]>([
-  {
-    text: "Teams",
-    href: {
-      name: RouteNamesEnum.teams
-    }
-  },
-  {
-    text: "Add new team"
-  }
-])
+const form = ref<InstanceType<typeof TeamForm>>()
 
-const teamStore = useTeamStore();
-
-const form = ref<typeof TeamForm>();
-
-const onSubmit = async (values: TeamRequest) => {
-  await teamStore.addTeam(values);
-}
-
-const onError = (e: AxiosError) => {
-  if (e.response?.status === 409) {
-    form.value?.setFieldError('name', 'Given name already exists')
-  }
-}
-
+const { breadcrumbs, onSubmit, onError } = useAddTeam(form);
 </script>
 
 <style lang="scss" scoped>

@@ -28,8 +28,8 @@ export default {
   width: $add-btn-w;
   flex-shrink: 0;
 
-  @media (max-width: 875px) {
-    width: $add-btn-w-875;
+  @media (max-width: 930px) {
+    width: $add-btn-w-930;
   }
 }
 </style>

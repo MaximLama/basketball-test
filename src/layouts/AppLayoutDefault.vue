@@ -26,6 +26,7 @@ import PrimaryMenu from "@/components/Navs/PrimaryMenu.vue";
   padding-top: $header-h;
 
   @media (max-width: 1050px) {
+    min-height: calc(100vh - $header-h-1050);
     padding-top: $header-h-1050;
   }
 }

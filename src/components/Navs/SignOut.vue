@@ -25,9 +25,14 @@ const { logout } = useLogout();
 .signout {
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: $item-menu-gap;
   align-items: center;
   cursor: pointer;
+
+  @media (max-width: 1050px) {
+    flex-direction: row;
+    gap: $item-menu-gap-1050;
+  }
 
   &__icon {
     flex-shrink: 0;

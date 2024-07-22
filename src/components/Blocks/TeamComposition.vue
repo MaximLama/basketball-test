@@ -41,18 +41,14 @@ export default {
 import type Player from '@/api/dto/players/Player';
 import useImage from '@/composables/helpers/image';
 import usePlayerAge from '@/composables/players/playerAge';
+import useTeamComposition from '@/composables/teams/teamComposition';
 import { RouteNamesEnum } from '@/router/router.types';
-import { toRef } from 'vue';
 
 const props = defineProps<{
   players: Player[]
 }>();
 
-const players = toRef(() => props.players);
-
-const isLast = (index?: number) => {
-  return typeof index === 'undefined' ? players.value.length === 0 : index === players.value.length - 1
-}
+const { players, isLast } = useTeamComposition(props)
 </script>
 
 <style lang="scss" scoped>

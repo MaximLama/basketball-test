@@ -19,64 +19,12 @@ export default {
 <script lang="ts" setup>
 import PlayerForm from "@/components/Forms/PlayerForm.vue";
 import BaseBreadcrumbs from "@/components/Blocks/BaseBreadcrumbs.vue";
-import type BreadCrumbsProps from "@/interfaces/BreadcrumbsProps";
-import { onMounted, ref } from "vue";
-import { RouteNamesEnum } from "@/router/router.types";
-import type Team from "@/api/dto/teams/Team";
-import type { AxiosError } from "axios";
-import { getTeams } from "@/api/teams/getTeams";
-import type PlayerRequest from "@/api/dto/players/PlayerRequest";
-import type Player from "@/api/dto/players/Player";
-import { useRoute, useRouter } from "vue-router";
-import { usePlayerStore } from "@/stores/players";
-import Error404 from "@/errors/error404";
+import { ref } from "vue";
+import useEditPlayer from "@/composables/players/editPlayer";
 
-const breadcrumbs = ref<BreadCrumbsProps[]>([
-  {
-    text: "Players",
-    href: {
-      name: RouteNamesEnum.players
-    }
-  },
-  {
-    text: "Edit player"
-  }
-])
+const form = ref<InstanceType<typeof PlayerForm>>()
 
-const form = ref<typeof PlayerForm>();
-
-const route = useRoute();
-const router = useRouter();
-const positions = ref<string[]>([]);
-const teams = ref<Team[]>([]);
-const player = ref<Player>();
-const playerStore = usePlayerStore();
-
-onMounted(async () => {
-  const id = parseInt(route.params.id as string);
-  try {
-    player.value = await playerStore.getPlayer(id);
-  }
-  catch (e) {
-    if (e instanceof Error404) {
-      router.push({ name: RouteNamesEnum.error404 })
-    }
-  }
-  positions.value = await playerStore.getPositions();
-  teams.value = (await getTeams()).data;
-})
-
-const onSubmit = async (values: PlayerRequest) => {
-  if (player.value) {
-    await playerStore.editPlayer({ ...values, id: player.value.id })
-  }
-}
-
-const onError = (e: AxiosError) => {
-  if (e.response?.status === 409) {
-    form.value?.setFieldError('name', 'Given name already exists')
-  }
-}
+const { breadcrumbs, onSubmit, onError, player, teams, positions } = useEditPlayer(form)
 </script>
 
 <style lang="scss" scoped>

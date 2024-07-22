@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-grid">
     <div class="card-grid">
       <div class="search">
         <SearchInput :value="searchName" @change="setSearchName" />
@@ -53,9 +53,13 @@ const addButtonTo = computed(() => {
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
 
-.container {
+.container-grid {
   display: flex;
   padding: $container-p;
+
+  @media (max-width: 1160px) {
+    padding: $container-p-1160;
+  }
 
   @media (max-width: 1050px) {
     padding: $container-p-1050;
@@ -69,9 +73,9 @@ const addButtonTo = computed(() => {
   row-gap: $grid-row-gap;
   column-gap: 1.25vw;
 
-  @media (max-width: 875px) {
-    grid-template: $grid-template-875;
-    row-gap: $grid-row-gap-875;
+  @media (max-width: 930px) {
+    grid-template: $grid-template-930;
+    row-gap: $grid-row-gap-930;
   }
 }
 
@@ -94,7 +98,7 @@ const addButtonTo = computed(() => {
   justify-self: end;
   flex-grow: 1;
 
-  @media (max-width: 875px) {
+  @media (max-width: 930px) {
     justify-self: unset;
   }
 }
@@ -108,12 +112,12 @@ const addButtonTo = computed(() => {
   }
 }
 
-@media (max-width: 875px) {
+@media (max-width: 930px) {
 
   .search,
   .select__wrapper,
   .add-btn__wrapper {
-    margin-bottom: $grid-mb-875;
+    margin-bottom: $grid-mb-930;
   }
 }
 </style>

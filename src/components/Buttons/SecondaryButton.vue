@@ -8,17 +8,13 @@
 export default {
   name: "SecondaryButton",
 };
-
-interface IButtonProps {
-  name: string;
-  disabled?: boolean;
-}
 </script>
 
 <script lang="ts" setup>
+import type ButtonProps from "@/interfaces/ButtonProps";
 import { toRefs, withDefaults } from "vue";
 
-const props = withDefaults(defineProps<IButtonProps>(), {
+const props = withDefaults(defineProps<ButtonProps>(), {
   name: "",
   disabled: false,
 });

@@ -1,8 +1,17 @@
 <template>
-  <aside class="nav" :class="{ 'nav--active': isMobileMenuShown }">
-    <PrimaryMenuItem v-for="({ svg, href, name, baseRoute }, index) in navLinks" :key="index" :svg="svg" :href="href"
-      :name="name" :base-route="baseRoute" />
-    <SignOut />
+  <aside class="aside" :class="{ 'aside--active': isMobileMenuShown }">
+    <div class="profile">
+      <div class="profile__img-wrapper">
+        <img :src="user.avatarUrl && user.avatarUrl !== 'null' ? user.avatarUrl : DefaultProfileImage"
+          class="profile__img">
+      </div>
+      <div class="profile__name">{{ user.name }}</div>
+    </div>
+    <div class="nav">
+      <PrimaryMenuItem v-for="({ svg, href, name, baseRoute }, index) in navLinks" :key="index" :svg="svg" :href="href"
+        :name="name" :base-route="baseRoute" />
+      <SignOut />
+    </div>
   </aside>
   <div class="overlay" :class="{ 'active': isMobileMenuShown }" @click.prevent="hideMainMenu"></div>
   <teleport to="#menubutton">
@@ -20,8 +29,9 @@
 import PrimaryMenuItem from "@/components/Navs/PrimaryMenuItem.vue";
 import SignOut from "@/components/Navs/SignOut.vue";
 import usePrimaryMenu from "@/composables/menu/primaryMenu";
+import DefaultProfileImage from "@/assets/img/profile.jpg";
 
-const { navLinks, isMobileMenuShown, toggleMainMenu, hideMainMenu } = usePrimaryMenu();
+const { navLinks, isMobileMenuShown, toggleMainMenu, hideMainMenu, user } = usePrimaryMenu();
 
 </script>
 
@@ -34,15 +44,13 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
 
-.nav {
+.aside {
   position: fixed;
   display: flex;
   flex-direction: column;
   height: calc(100vh - $header-h);
   width: $nav-width;
   flex-shrink: 0;
-  padding: 2rem;
-  gap: 2.25rem;
   background: $white;
 
   :deep(.signout) {
@@ -58,7 +66,20 @@ export default {
       display: flex;
       z-index: 2;
       height: calc(100vh - $header-h-1050);
+      width: $nav-width-1050;
     }
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: $nav-p;
+  gap: 2.25rem;
+
+  @media (max-width: 1050px) {
+    padding: $nav-p-1050;
   }
 }
 
@@ -78,6 +99,35 @@ export default {
     opacity: 60%;
     z-index: 1;
     overflow-y: auto;
+  }
+}
+
+.profile {
+  display: none;
+  height: 5rem;
+  border-bottom: 0.5px solid $light-grey;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.75rem;
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  @media (max-width: 1050px) {
+    display: flex;
   }
 }
 </style>

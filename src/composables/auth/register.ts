@@ -20,14 +20,13 @@ export default function useRegister() {
   const { handleSubmit, isSubmitting, setFieldError, errors } = useForm<SignUpFormRequest>({
     validationSchema: toTypedSchema(
       object({
-        name: string().required().max(100).min(3).default('name'),
-        login: string().required().max(100).min(6).default('login'),
-        password: string().required().max(100).min(8).default('password'),
+        name: string().required().max(100).min(3),
+        login: string().required().max(100).min(6),
+        password: string().required().max(100).min(8),
         confirmPassword: string()
           .required()
-          .oneOf([ref('password')])
-          .default('password'),
-        agreement: bool().required().isTrue().default(true)
+          .oneOf([ref('password')]),
+        agreement: bool().required().isTrue()
       })
     )
   })

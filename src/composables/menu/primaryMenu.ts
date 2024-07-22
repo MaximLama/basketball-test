@@ -4,6 +4,8 @@ import PlayersIcon from '@/components/Icons/PlayersIcon.vue'
 import { RouteNamesEnum } from '@/router/router.types'
 import { ref } from 'vue'
 import useOnResizeWindow from '../helpers/onResizeWindow'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
 
 export default function usePrimaryMenu() {
   const navLinks: IPrimaryMenuItemProps[] = [
@@ -41,5 +43,7 @@ export default function usePrimaryMenu() {
     }
   })
 
-  return { navLinks, isMobileMenuShown, toggleMainMenu, hideMainMenu }
+  const { user } = storeToRefs(useUserStore())
+
+  return { navLinks, isMobileMenuShown, toggleMainMenu, hideMainMenu, user }
 }
