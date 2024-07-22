@@ -18,7 +18,8 @@
             <img :src="useImage(player.avatarUrl)">
           </div>
           <div class="item__detail-info">
-            <span class="item__detail-name">{{ player.name }}</span>
+            <router-link :to="{ name: RouteNamesEnum.player, params: { id: player.id } }" class="item__detail-name">{{
+              player.name }}</router-link>
             <span class="item__detail-position">{{ player.position }}</span>
           </div>
         </div>
@@ -40,6 +41,7 @@ export default {
 import type Player from '@/api/dto/players/Player';
 import useImage from '@/composables/helpers/image';
 import usePlayerAge from '@/composables/players/playerAge';
+import { RouteNamesEnum } from '@/router/router.types';
 import { toRef } from 'vue';
 
 const props = defineProps<{

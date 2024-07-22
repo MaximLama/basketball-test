@@ -9,6 +9,7 @@ import { editPlayer as editedPlayerRequest } from '@/api/players/editPlayer'
 import type Player from '@/api/dto/players/Player'
 import { getPositions as getPositionsRequest } from '@/api/players/getPositions'
 import Error404 from '@/errors/error404'
+import { deletePlayer as deletePlayerRequest } from '@/api/players/deletePlayer'
 
 interface PlayersStore {
   [key: PlayerDetail['id']]: PlayerDetail
@@ -67,5 +68,12 @@ export const usePlayerStore = defineStore('player', () => {
     return positions.value
   }
 
-  return { players, addPlayer, getPlayer, editPlayer, getPositions }
+  const deletePlayer = async (id: number) => {
+    await deletePlayerRequest(id)
+    if (id in players.value) {
+      delete players.value[id]
+    }
+  }
+
+  return { players, addPlayer, getPlayer, editPlayer, getPositions, deletePlayer }
 })

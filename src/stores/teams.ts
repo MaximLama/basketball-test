@@ -7,6 +7,7 @@ import { getTeam as getTeamRequest } from '@/api/teams/getTeam'
 import type Player from '@/api/dto/players/Player'
 import { getPlayers } from '@/api/players/getPlayers'
 import { editTeam as editTeamRequest } from '@/api/teams/editTeam'
+import { deleteTeam as deleteTeamRequest } from '@/api/teams/deleteTeam'
 
 interface TeamsStore {
   [key: Team['id']]: Team & {
@@ -46,5 +47,12 @@ export const useTeamStore = defineStore('team', () => {
     await requestPlayers(data.id)
   }
 
-  return { teams, addTeam, getTeam, editTeam }
+  const deleteTeam = async (id: number) => {
+    await deleteTeamRequest(id)
+    if (id in teams.value) {
+      delete teams.value[id]
+    }
+  }
+
+  return { teams, addTeam, getTeam, editTeam, deleteTeam }
 })

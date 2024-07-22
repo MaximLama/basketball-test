@@ -6,7 +6,9 @@
         <router-link :to="{ name: RouteNamesEnum.editPlayer, params: { id: player.id } }" class="card__edit">
           <EditIcon />
         </router-link>
-        <DeleteIcon />
+        <div class="card__delete" @click.prevent="deletePlayer">
+          <DeleteIcon />
+        </div>
       </div>
     </div>
     <div class="card__detail">
@@ -60,9 +62,14 @@ import { RouteNamesEnum } from '@/router/router.types';
 import type PlayerDetail from '@/api/dto/players/PlayerDetail';
 import useImage from '@/composables/helpers/image';
 import usePlayerAge from '@/composables/players/playerAge';
+import { usePlayerStore } from '@/stores/players';
+import { useRouter } from 'vue-router';
 
 const props = defineProps<{ player: PlayerDetail }>();
 const player = toRef(() => props.player);
+const playerStore = usePlayerStore();
+
+const router = useRouter();
 
 const age = usePlayerAge(player.value.birthday);
 
@@ -77,6 +84,11 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
     text: player.value.name
   }
 ]);
+
+const deletePlayer = async () => {
+  await playerStore.deletePlayer(player.value.id)
+  router.push({ name: RouteNamesEnum.players })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -137,6 +149,12 @@ const breadcrumbs = ref<BreadCrumbsProps[]>([
   &__edit {
     display: flex;
     align-items: center;
+  }
+
+  &__delete {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
   }
 }
 

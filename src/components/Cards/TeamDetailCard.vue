@@ -6,7 +6,9 @@
         <router-link :to="{ name: RouteNamesEnum.editTeam, params: { id: team.id } }" class="card__edit">
           <EditIcon />
         </router-link>
-        <DeleteIcon />
+        <div class="card__delete" @click.prevent="deleteTeam">
+          <DeleteIcon />
+        </div>
       </div>
     </div>
     <div class="card__detail">
@@ -51,12 +53,16 @@ import { computed, toRef } from 'vue';
 import { RouteNamesEnum } from '@/router/router.types';
 import type Team from '@/api/dto/teams/Team';
 import useImage from '@/composables/helpers/image';
+import { useTeamStore } from '@/stores/teams';
+import { useRouter } from 'vue-router';
 
 const props = defineProps<{
   team: Team
 }>();
 
 const team = toRef(() => props.team)
+const teamStore = useTeamStore();
+const router = useRouter();
 
 const breadcrumbs = computed<BreadCrumbsProps[]>(() => [
   {
@@ -69,6 +75,16 @@ const breadcrumbs = computed<BreadCrumbsProps[]>(() => [
     text: team.value.name
   }
 ])
+
+const deleteTeam = async () => {
+  try {
+    await teamStore.deleteTeam(team.value.id)
+    router.push({ name: RouteNamesEnum.teams })
+  }
+  catch {
+    alert("The command could not be deleted. Perhaps there are players in the team.")
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -121,6 +137,12 @@ const breadcrumbs = computed<BreadCrumbsProps[]>(() => [
   &__edit {
     display: flex;
     align-items: center;
+  }
+
+  &__delete {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
   }
 }
 

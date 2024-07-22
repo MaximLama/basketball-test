@@ -93,7 +93,10 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: RouteNamesEnum.players,
                 component: () => import('@/pages/Players.vue'),
                 meta: {
-                  requiresAuth: true
+                  requiresAuth: true,
+                  addButtonTo: {
+                    name: RouteNamesEnum.addPlayer
+                  }
                 }
               }
             ]
